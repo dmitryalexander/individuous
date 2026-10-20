@@ -216,3 +216,10 @@ group, or to Favorites from All Creators; pressing A again keeps that membership
 from All Creators. At least one named creator group is kept and can be renamed.
 The manager has no repeated Groups buttons or tutorial banner; instructions live
 in Menu. Existing follows and memberships are preserved when Favorites is added.
+
+Menu’s **Temporary storage** shows reusable browser data and app cache usage.
+**Clear temporary data** removes only recreatable cache and this tab’s Restore
+Feed snapshot. Collections, follows, history, settings, login hashes and recovery
+backups are preserved. Browser-managed HTTP media cache and saved downloads
+are not included. Browser byte counts estimate UTF-16 storage; database cache
+counts cover cached text payload, and cleared database space is reused.

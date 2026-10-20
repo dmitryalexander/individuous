@@ -270,7 +270,7 @@ class Handler(BaseHTTPRequestHandler):
             return self.proxy()
         path = urlsplit(self.path).path
         # Only this app's own pages may write: other websites cannot forge a same-origin JSON POST.
-        if (path not in ['/items', '/export', '/import', '/reset', '/recover'] or self.headers.get('Origin') not in ORIGINS
+        if (path not in ['/items', '/export', '/import', '/reset', '/recover', '/temporary'] or self.headers.get('Origin') not in ORIGINS
                 or self.headers.get('Host') != urlsplit(self.headers.get('Origin', '')).netloc
                 or not (self.headers.get('Content-Type') or '').startswith('application/json')):
             return self.reply(403, {'message': 'Local app only.'})
@@ -342,6 +342,22 @@ class Handler(BaseHTTPRequestHandler):
                 return
             if data.get('epoch', '') != epoch:
                 return self.reply(409, {'message': 'Data changed. Reload before continuing.'})
+            if path == '/temporary':
+                if not isinstance(data.get('clear', False), bool):
+                    return self.reply(400, {'message': 'Invalid storage request.'})
+                try:
+                    with account() as (cur, email):
+                        cur.execute("SET LOCAL statement_timeout = '10s'")
+                        # Only the regenerable detail cache, never channel_videos,
+                        # follows, watched IDs or playlist records.
+                        if data.get('clear'):
+                            cur.execute('DELETE FROM videos')
+                        cur.execute('SELECT count(*), coalesce(sum(octet_length(id) + coalesce(octet_length(info), 0)), 0) FROM videos')
+                        count, size = cur.fetchone()
+                    return self.reply(200, {'bytes': int(size), 'count': count, 'label': 'Cached video details',
+                                            'note': 'Database space is reused after clearing; its disk file may not shrink.'})
+                except Exception:
+                    return self.reply(503, {'message': 'Could not access the video detail cache. Try again.'})
             reset = path == '/reset'
             if reset and data.get('confirm') != 'CLEAR EVERYTHING':
                 return self.reply(400, {'message': 'Confirm Clear everything in the Menu.'})
