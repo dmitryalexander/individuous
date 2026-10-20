@@ -69,3 +69,6 @@ trust file timestamps for CSS/JS; personalized HTML/JSON is no-store.
 
 Menu tutorials: compact uppercase action headings sit beside amber input caps.
 Mouse actions use matching CLICK badges; explanatory text remains below.
+
+Tutorial refinement: title-case Click badges and centered rectangular frames
+for the combined input and uppercase heading.
