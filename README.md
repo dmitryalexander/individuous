@@ -69,12 +69,12 @@ Compose volumes with `down -v` deletes the preview's data.
 
 ## Protected combined views
 
-Favorites and Search each offer **All Groups**. Favorites combines saved videos
+Favorites offers **All Lists** and Search offers **All Groups**. Favorites combines saved videos
 from every playlist, showing each video once. Search combines all groups' terms,
 counting shared terms once. Both options are computed views and cannot be renamed
 or deleted. Choose a named playlist to save, move, remove or shuffle its videos;
 choose a named search group to add or edit terms. The combined contents are rebuilt
-from their source groups and are never saved as duplicate collections.
+from their source playlists or search groups and are never saved as duplicate collections.
 
 Play and Following offer **All Creators**, which includes everyone you follow,
 even creators assigned to no custom group. The previous All following ID is kept;

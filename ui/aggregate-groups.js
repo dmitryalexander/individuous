@@ -1,4 +1,4 @@
-/* Computed All Groups views. Derived contents are never persisted as a collection. */
+/* Computed All Lists / All Groups views. Derived contents are never persisted as a collection. */
 ;((root) => {
   'use strict';
   const ID = '__pt_all_groups__', NAME = 'All Groups';
@@ -8,10 +8,10 @@
       const key = field === 'items' ? value.id : value.trim().toLowerCase();
       if (!seen.has(key)) { seen.add(key); values.push(value); }
     }
-    return {...data,lists:[{id:ID,name:NAME,[field]:values},...source]};
+    return {...data,lists:[{id:ID,name:field === 'items' ? 'All Lists' : NAME,[field]:values},...source]};
   }
   function persist(data, field) {
-    return {...data,lists:data.lists.map(list => list.id === ID ? {...list,name:NAME,[field]:[]} : list)};
+    return {...data,lists:data.lists.map(list => list.id === ID ? {...list,name:field === 'items' ? 'All Lists' : NAME,[field]:[]} : list)};
   }
   const api = {ID,NAME,combine,persist};
   if (typeof module !== 'undefined' && module.exports) module.exports = api;

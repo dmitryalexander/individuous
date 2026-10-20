@@ -28,7 +28,7 @@ Keep your private .env and data volumes when upgrading. Never publish either.
 - Companion, gateway and PostgreSQL images are pinned to the reviewed digests.
 - Existing automatic-login account mappings survive bootstrap.
 - Builds include and execute upstream tests, and work without .git metadata.
-- The newer All Groups/All Creators views, guidance artwork, menu shortcuts,
+- The newer All Lists/All Groups/All Creators views, guidance artwork, menu shortcuts,
   following groups and external download/transcript tools are now the release UI.
 
 ## Existing volume overrides

@@ -35,7 +35,7 @@
   let pickerMove = null; // Playlists page: set while a video is picked up to move (listControls)
   function playlistPicker(label, here, opts = {}) {
     const locked = id => id === window.ptAggregateGroups.ID || !!opts.locked?.(id);
-    const lockedName = opts.lockedName || 'All Groups';
+    const lockedName = opts.lockedName || 'All Lists';
     // opts (search groups): read, save, refresh, select, blank, noun, nouns, menuLabel. Defaults are the playlists.
     const R = opts.read || readLists, F = opts.refresh || refreshLists, P = opts.select || pickPlaylist;
     const W = opts.save ? (data => { if (opts.save(data) === false) throw new Error('Could not save'); }) : saveLists;
@@ -109,7 +109,7 @@
       addEventListener('keydown', keys, true);
     }
     function startEdit(list) {
-      if (list && locked(list.id)) { showHint(lockedName + ' is always kept. Use A to create a named group.', true); return; }
+      if (list && locked(list.id)) { showHint(lockedName + ' is always kept. Use A to create a named ' + NOUN + '.', true); return; }
       if (menu.hidden) open();
       if (editing) render();
       disarm();
@@ -267,12 +267,12 @@
   function validSavedVideo(item) { return item && /^[\w-]{11}$/.test(item.id) && typeof item.title === 'string'; }
   function updateActivePlaylist(data) {
     const label=$('.pt-active-playlist');if(!label)return;
-    try{data=data||readLists();const name=data.lists.find(list=>list.id===data.activeId).name;label.textContent=name;label.title=(data.activeId === window.ptAggregateGroups.ID ? 'Viewing All Groups · choose a named playlist to save or edit videos' : 'Saving to '+name)+' · click to change · A for a new playlist';label.setAttribute('aria-label',label.title);}catch(_){label.textContent='Playlist unavailable';}
+    try{data=data||readLists();const name=data.lists.find(list=>list.id===data.activeId).name;label.textContent=name;label.title=(data.activeId === window.ptAggregateGroups.ID ? 'Viewing All Lists · choose a named playlist to save or edit videos' : 'Saving to '+name)+' · click to change · A for a new playlist';label.setAttribute('aria-label',label.title);}catch(_){label.textContent='Playlist unavailable';}
   }
   function chooseNamedPlaylist() {
     const label = $('.pt-active-playlist'); label?.dispatchEvent(new CustomEvent('pt-picker-open'));
     const hint = $('.pt-playlist-picker:not([hidden]) .pt-picker-hint');
-    if (hint) hint.textContent = 'All Groups combines your playlists. Choose a named playlist to save, move or remove videos.';
+    if (hint) hint.textContent = 'All Lists combines your playlists. Choose a named playlist to save, move or remove videos.';
   }
   function pickPlaylist(id) {
     try { const data=readLists(); if(!data.lists.some(list=>list.id===id)) return; data.activeId=id; saveLists(data); renderListOptions(data); refreshLists(); }
@@ -425,7 +425,7 @@
     renderListOptions(data);
     const list=data.lists.find(list=>list.id===data.activeId);
     wall.replaceChildren();
-    note.textContent=data.activeId === window.ptAggregateGroups.ID ? 'All Groups combines every playlist, showing each video once. Choose a named playlist to save, move or remove videos.' : list.items.length?'':'This list is empty. Hover a video anywhere and press A to add it to '+list.name+'.';
+    note.textContent=data.activeId === window.ptAggregateGroups.ID ? 'All Lists combines every playlist, showing each video once. Choose a named playlist to save, move or remove videos.' : list.items.length?'':'This list is empty. Hover a video anywhere and press A to add it to '+list.name+'.';
     list.items.forEach(item=>{
       const card=document.createElement('div');card.className='pure-u-1 pure-u-md-1-4';
       const box=document.createElement('div');box.className='h-box';

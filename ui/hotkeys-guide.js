@@ -86,8 +86,8 @@
   function favorites() {
     var s = box('pt-guide-favorites', 10, ICONS.star, 'Favorites', [
       'Favorites are the videos you keep. They live in playlists: you can make as many as you like. Open them with the star at the top left. One playlist is always the active one; its name sits right next to the star.']);
-    s.append(el('h3', '', 'All Groups'),
-      note('Choose All Groups in the playlist list to see saved videos from every playlist, with duplicates shown once. This combined view is always kept and cannot be renamed or deleted. Choose a named playlist before saving, moving, removing or shuffling videos; All Groups does not change several playlists at once.'));
+    s.append(el('h3', '', 'All Lists'),
+      note('Choose All Lists in the playlist list to see saved videos from every playlist, with duplicates shown once. This combined view is always kept and cannot be renamed or deleted. Choose a named playlist before saving, moving, removing or shuffling videos; All Lists does not change several playlists at once.'));
     s.append(el('h3', '', 'Saving a video'),
       el('p', '', 'Point at any video (your feed, a search, History, a creator’s page) and press A. It goes into the active playlist and a quick flash confirms it. Press A again and it comes back out. A video can be in several playlists at once.'),
       el('p', '', 'Once a video is saved anywhere, pointing at it shows a green border instead of the usual gray one, so you can tell at a glance what you already have.'));
@@ -96,7 +96,7 @@
     s.append(row(
       card(['A'], 'New playlist', 'With the list open, press A (or press A while pointing at the closed name). Type a name, Enter to save, Esc to cancel. The new playlist becomes the active one.'),
       card(['R'], 'Rename', 'Point at a playlist in the open list, or reach it with the arrow keys, and press R. Enter saves, Esc cancels.'),
-      card(['X'], 'Delete', 'Point at a playlist and press X. The row turns red; press X again within a few seconds to delete it. All Groups is always kept; it cannot be renamed or deleted.')));
+      card(['X'], 'Delete', 'Point at a playlist and press X. The row turns red; press X again within a few seconds to delete it. All Lists is always kept; it cannot be renamed or deleted.')));
     s.append(note('Keep the mouse on the list while you press a key: if you move it onto the page, the list closes and the key goes to the page instead. Playlist names must be different (capitals don’t matter).'));
     s.append(tryButton('Open the playlist list to try it', '.pt-active-playlist'));
     s.append(el('h3', '', 'On the Playlists page'),

@@ -17,12 +17,12 @@
     playlists: {
       label: 'A little help getting started · Playlists',
       title: 'Hello! You’re on the star page.',
-      intro: 'This is your saved-video collection: things to watch later, favorites to return to, and finds from your travels. All Groups combines every playlist and shows each video once.',
+      intro: 'This is your saved-video collection: things to watch later, favorites to return to, and finds from your travels. All Lists combines every playlist and shows each video once.',
       nudge: 'Start with the rectangle next to the star, in the top left. It shows the playlist you’re saving to.',
       steps: [
         { keys: ['R'], title: 'Make it yours', text: 'Click the playlist rectangle, point at a name in the list, then press ', key: 'R', after: ' to rename it.' },
         { keys: ['A'], title: 'Make room for something new', text: 'With that list open, press ', key: 'A', after: ' to add a playlist. Make one for a topic, a mood, or your next rabbit hole.' },
-        { keys: ['X', 'X'], title: 'Let a playlist go', text: 'Point at a named playlist and press ', key: 'X', after: ' twice to delete it. All Groups is always kept and cannot be renamed.' }
+        { keys: ['X', 'X'], title: 'Let a playlist go', text: 'Point at a named playlist and press ', key: 'X', after: ' twice to delete it. All Lists is always kept and cannot be renamed.' }
       ],
       footer: ['Ready to collect? Search for something you like. Hover a video and press ', {key:'A'}, ' to save it to your active playlist.'],
       action: 'Open playlist controls', target: '.pt-active-playlist',

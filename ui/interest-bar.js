@@ -374,7 +374,7 @@
       }
       updateGroupLabel();
       if (typeof window.ptMenuPicker === 'function') window.ptMenuPicker(groupLabel, {
-        here: onGroupFeed, menuClass: 'pt-group-picker', noun: 'search group', nouns: 'search groups', menuLabel: 'Choose a search group',
+        lockedName: 'All Groups', here: onGroupFeed, menuClass: 'pt-group-picker', noun: 'search group', nouns: 'search groups', menuLabel: 'Choose a search group',
         blank: () => ({terms: []}),
         read: () => readLists(),
         save: data => {
