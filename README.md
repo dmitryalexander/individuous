@@ -223,3 +223,8 @@ Feed snapshot. Collections, follows, history, settings, login hashes and recover
 backups are preserved. Browser-managed HTTP media cache and saved downloads
 are not included. Browser byte counts estimate UTF-16 storage; database cache
 counts cover cached text payload, and cleared database space is reused.
+
+Optional **Automatically clear temporary data daily** runs when the app is open,
+at most once per 24 hours in each browser. It preserves the current tab’s Restore
+Feed and all saved information/login hashes. The preference is saved with app
+settings; failed cleanup is retried on a later check rather than marked complete.

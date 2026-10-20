@@ -2,7 +2,7 @@
 ;(() => {
   'use strict';
   const ENDPOINT = '/app-data/items';
-  const KEEP = /^pt-(?:(?:video-lists|starred-videos|watch-later-default|search-term-lists|following-groups|hidden-feed|channel-feed-order|external-tools|inline-volume|watch-crop|browser-settings)-v1|recommended-searches-v1(?:\.(?:order|wall-order)-v1)?|previews)$/;
+  const KEEP = /^pt-(?:(?:video-lists|starred-videos|watch-later-default|search-term-lists|following-groups|hidden-feed|channel-feed-order|external-tools|inline-volume|watch-crop|browser-settings)-v1|recommended-searches-v1(?:\.(?:order|wall-order)-v1)?|previews|auto-cleanup)$/;
   const OWN = /^(?:pt-|pinless-|individuous-|app-data-|continuation_cache_|dark_mode$|save_player_pos$|stream$|notification_count$)/;
   const BROWSER_KEYS = ['dark_mode', 'save_player_pos'], BROWSER_STATE = 'pt-browser-settings-v1';
   const REV = 'app-data-revisions-v1';
