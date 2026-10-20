@@ -106,7 +106,7 @@
     following: {
       label:'A little help getting started · Following groups', title:'Your creators, organized into feeds.',
       intro:'All Creators shows everyone you follow and is always kept. Make named groups for different interests; a creator can belong to several groups. The play button opens the selected group’s video feed.',
-      nudge:'The rectangle beside Play at the top right chooses your creator group. Use the person icon to return here to organize creators. This guide lives on this page.',
+      nudge:'The rectangle beside Play at the top right chooses your creator group. Use the person icon to return here to organize creators. The introduction appears here only while the selected group is empty.',
       steps:[
         {keys:['A'],title:'Create a creator group',text:'Point at the creator-group rectangle and press ',key:'A',after:' to make a group. Choose its name in the list to switch feeds.'},
         {keys:['I'],title:'Choose who belongs',text:'Point at a named creator group and press ',key:'I',after:' to choose its creators. Over the person icon, this edits the full follow list instead.'},
@@ -211,17 +211,6 @@
   }
   function show(kind, empty, hideStatus = true) {
     const sourceKind = kind;
-    if (kind === 'following' && location.pathname === '/subscription_manager') {
-      const old = document.getElementById(ID); if (old?.dataset.kind === 'following') old.remove();
-      return;
-    }
-    // Creator-group teaching belongs in Menu, not the video feed.
-    if (kind === 'subscriptions' && new URLSearchParams(location.search).get('pt_restore') !== '1') {
-      const old = document.getElementById(ID);
-      if (old && ['subscriptions','followingfeed'].includes(old.dataset.kind)) old.remove();
-      $('#contents .continuous-status')?.classList.remove('pt-welcome-suppressed');
-      return;
-    }
     if (kind === 'subscriptions') {
       try { if (window.ptFollowingGroups && window.ptFollowingGroups.active().id !== 'all') kind = 'followingfeed'; } catch (_) { /* Feed status reports invalid group data. */ }
     }

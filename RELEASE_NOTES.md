@@ -6,6 +6,10 @@ Keep your private .env and data volumes when upgrading. Never publish either.
 
 ## Fixed in this release
 
+- Avatar introductions appear on empty creator groups and subscription feeds,
+  and disappear as soon as content is available. Populated creator pages retain
+  their clean avatar wall without repeated instructions.
+
 - Standalone playlist/search-term pages use content-stamped CSS/JS URLs and the
   shared update bootstrap. Mixed cached styles/scripts refresh together, without
   interrupting active playback or changing saved data.

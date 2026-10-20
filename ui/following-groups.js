@@ -66,7 +66,7 @@
       item.card.querySelectorAll('.pt-creator-groups').forEach(button => button.remove());
     }
     document.querySelector('.pt-following-manager')?.remove();
-    window.ptEmptyGuide?.show('following',false);
+    window.ptEmptyGuide?.show('following',included.size === 0);
   }
   function select(id) {
     try {
