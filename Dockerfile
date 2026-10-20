@@ -224,6 +224,13 @@ COPY ui/data-controls.css /tmp/data-controls.css
 RUN cat /tmp/data-controls.js >> /invidious/assets/js/handlers.js && cat /tmp/data-controls.css >> /invidious/assets/css/default.css
 USER invidious
 
+# Shared Menu tutorial headings and mouse-action badges.
+USER root
+COPY ui/tutorial-format.js /tmp/tutorial-format.js
+COPY ui/tutorial-format.css /tmp/tutorial-format.css
+RUN cat /tmp/tutorial-format.js >> /invidious/assets/js/handlers.js && cat /tmp/tutorial-format.css >> /invidious/assets/css/default.css
+USER invidious
+
 # Pair every interface change with fresh URLs on the standalone pages, and let
 # the banner bootstrap detect mixed cached assets on upstream-rendered pages.
 USER root

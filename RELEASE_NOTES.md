@@ -66,3 +66,6 @@ The build fingerprint includes all shipped assets. Refresh covers page-specific
 player scripts/styles and local artwork, supports unavailable session storage, and
 detects a newly deployed build after Back/Forward. Gateway revalidation does not
 trust file timestamps for CSS/JS; personalized HTML/JSON is no-store.
+
+Menu tutorials: compact uppercase action headings sit beside amber input caps.
+Mouse actions use matching CLICK badges; explanatory text remains below.
