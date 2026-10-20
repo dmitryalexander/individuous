@@ -223,3 +223,10 @@ COPY ui/data-controls.js /tmp/data-controls.js
 COPY ui/data-controls.css /tmp/data-controls.css
 RUN cat /tmp/data-controls.js >> /invidious/assets/js/handlers.js && cat /tmp/data-controls.css >> /invidious/assets/css/default.css
 USER invidious
+
+# Pair every interface change with fresh URLs on the standalone pages, and let
+# the banner bootstrap detect mixed cached assets on upstream-rendered pages.
+USER root
+COPY docker/stamp-assets.sh /tmp/stamp-assets.sh
+RUN sh /tmp/stamp-assets.sh /invidious/assets
+USER invidious

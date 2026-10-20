@@ -6,6 +6,10 @@ Keep your private .env and data volumes when upgrading. Never publish either.
 
 ## Fixed in this release
 
+- Standalone playlist/search-term pages use content-stamped CSS/JS URLs and the
+  shared update bootstrap. Mixed cached styles/scripts refresh together, without
+  interrupting active playback or changing saved data.
+
 - Save/load reusable login hashes, separate from ordinary info exports.
 - Menu info export/import and confirmed Clear everything.
 - Per-item compare-and-save revisions prevent silent collection overwrites.

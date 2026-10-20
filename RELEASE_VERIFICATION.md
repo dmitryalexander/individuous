@@ -1,7 +1,7 @@
 # Release verification — October 20, 2026
 
 - Pinful: Go regression suite and JavaScript/template checks passed.
-- Individuous: 172 upstream Crystal examples, 29 custom JavaScript tests,
+- Individuous: 172 upstream Crystal examples, 36 custom JavaScript tests,
   eight synthetic session-service tests, five HTTP storage/restart/retention tests and
   PowerShell first-run/idempotence checks passed.
 - Portable integration checks passed: account/collection round trip, native Int64
@@ -32,3 +32,6 @@ browser fixture reproduced the missing shortcut on the prior release and verifie
 its fix on both page types. The watch video stayed attached and playing. The
 installed and development profiles use the same updated assets; screenshot files
 were supplied by the owner and added unchanged to the README.
+
+Cache repair: seven regression checks cover mixed CSS/JS, matching assets, failed
+fetches, playback protection, reload throttling and standalone-page coverage.
