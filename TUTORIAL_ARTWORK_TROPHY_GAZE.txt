@@ -1,0 +1,6 @@
+October 19, 2026 — subscription manager downward trophy gaze
+Method: built-in imagegen; transparent_background=true.
+Edit target: ui/tutorial-following-trophy.png.
+Final asset: ui/tutorial-following-trophy-down.png
+Prompt:
+Make a very small targeted edit to this exact transparent character illustration: change ONLY his head angle and eye gaze so he is clearly looking down affectionately at the gold play-button award he is holding. Tip his chin downward naturally and direct both pupils downward toward the centered play emblem. Keep his eyes open and visible behind the same black rectangular glasses, with the same gentle small closed-mouth smile. Preserve the exact character identity, head size/body proportions, brown messy hair/cowlick, sketchy hand-drawn lines, muted colors, dotted gray shirt, textured jeans, barefoot standing pose, both hands holding the bottom corners of the same gold plaque, plaque position/size/play symbol, and full-body framing. Do not redesign or change the trophy or other body parts. Preserve genuine transparent alpha background. No scene, background, floor, shadows, glow, halo, text or extra objects.

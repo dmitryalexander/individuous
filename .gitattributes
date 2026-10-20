@@ -1,3 +1,5 @@
+* text=auto eol=lf
+*.cmd text eol=crlf
 # https://github.community/t/how-to-change-the-category/2261/3
 videojs-*.js linguist-detectable=false
 video.min.js linguist-detectable=false

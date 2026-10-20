@@ -1,0 +1,49 @@
+# Individuous — consolidated release, 2026-10-20
+
+This source combines the installed functionality and the latest development UI.
+Start.cmd (Windows) or Docker Compose builds this repository independently.
+Keep your private .env and data volumes when upgrading. Never publish either.
+
+## Fixed in this release
+
+- Save/load reusable login hashes, separate from ordinary info exports.
+- Menu info export/import and confirmed Clear everything.
+- Per-item compare-and-save revisions prevent silent collection overwrites.
+  Conflicts preserve unsaved browser data until an explicit choice; download
+  that copy before discarding either version. Unrelated collection edits still save.
+- Damaged stores fail closed and offer explicitly selected recovery copies.
+- First-sync copies are bounded to 20 files, 128 MiB and 30 days, retaining the
+  newest; daily recovery retains 14 dates.
+- Durable operation journals finish interrupted import/reset operations before
+  new data is accepted. Never manually delete an unfinished operation.json.
+- Compose instances have independent names, image tags and volumes.
+
+- Native account mutations pass through the same serialized gate as reset,
+  with per-page epochs. Old unversioned requests must reload. Normal page
+  navigation remains available. The internal services are not published separately.
+- Companion, gateway and PostgreSQL images are pinned to the reviewed digests.
+- Existing automatic-login account mappings survive bootstrap.
+- Builds include and execute upstream tests, and work without .git metadata.
+- The newer All Groups/All Creators views, guidance artwork, menu shortcuts,
+  following groups and external download/transcript tools are now the release UI.
+
+## Existing volume overrides
+
+In your private .env, retain the existing DB_PASSWORD, HMAC_KEY, COMPANION_KEY
+and AUTO_SESSION_ID. Optional INDIVIDUOUS_DB_VOLUME, INDIVIDUOUS_DATA_VOLUME,
+INDIVIDUOUS_SESSION_VOLUME and INDIVIDUOUS_CACHE_VOLUME select existing volumes.
+INDIVIDUOUS_SOURCE can point a local deployment wrapper at this source tree.
+Use COMPOSE_PROJECT_NAME and INDIVIDUOUS_PORT for a separate development instance.
+Do not start two databases against the same volume.
+
+For a Git clone run `git submodule update --init mocks`; the fixture commit is
+b55d58dea94f7144ff0205857dfa70ec14eaa872. Source archives include these fixtures.
+
+## Verification scope
+
+See [RELEASE_VERIFICATION.md](RELEASE_VERIFICATION.md) for exact test results.
+Tests use synthetic credentials and disposable stores. Browser destructive actions
+are mocked on installed apps. No real reset/import is part of the upgrade.
+External Pinterest/YouTube availability and expired credentials remain outside
+this application's control. This was a targeted review of custom code and build
+configuration, not an audit of every upstream dependency.

@@ -1,0 +1,6 @@
+.pt-external-settings label{display:block;margin:14px 0 0;font:13px system-ui;color:#ddd}
+.pt-external-settings input,.pt-external-copy input{box-sizing:border-box;display:block;width:100%;margin:6px 0;padding:10px 12px;background:#222;color:#eee;border:1px solid #666;border-radius:8px;font:13px system-ui}
+.pt-external-settings button,.pt-external-copy button{margin:8px 8px 0 0;padding:8px 16px;background:#222;color:#eee;border:1px solid #666;border-radius:20px;cursor:pointer;font:13px system-ui}
+.pt-external-settings button:hover,.pt-external-settings button:focus-visible,.pt-external-settings input:focus-visible{border-color:#e6ad45;outline:2px solid #e6ad45;outline-offset:2px}
+.pt-external-copy{box-sizing:border-box;width:min(560px,calc(100% - 32px));background:#1b1b1a;color:#ddd;border:1px solid #666;border-radius:14px;padding:24px;font:14px system-ui}
+.pt-external-copy::backdrop{background:#000a}

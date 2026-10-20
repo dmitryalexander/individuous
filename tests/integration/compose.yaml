@@ -1,0 +1,44 @@
+name: myapps-release-check
+services:
+  invidious-db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: invidious
+      POSTGRES_USER: kemal
+      POSTGRES_PASSWORD: synthetic-test-only
+    tmpfs: [/var/lib/postgresql/data]
+    volumes: ["./test-db.sql:/docker-entrypoint-initdb.d/test.sql:ro", "../../config/sql:/schema:ro"]
+    healthcheck:
+      test: [CMD, pg_isready, -U, kemal, -d, invidious]
+      interval: 1s
+      retries: 30
+  youtube-account:
+    image: individuous-account-test
+    build: ../../youtube-account
+    volumes: [test-session:/data]
+  appdata:
+    image: individuous-data-test
+    build: ../../appdata
+    environment:
+      DB_PASSWORD: synthetic-test-only
+      AUTO_SESSION_ID: synthetic-test-session
+      APP_ORIGINS: http://localhost:3020
+    volumes: [test-data:/data]
+    depends_on:
+      invidious-db: {condition: service_healthy}
+  invidious:
+    image: individuous-data-test
+    volumes: [".:/tests:ro"]
+    command: [python, /tests/upstream_test.py]
+  tester:
+    image: individuous-data-test
+    user: root
+    profiles: [test]
+    volumes: [".:/tests:ro", "test-data:/data"]
+    entrypoint: [python]
+networks:
+  default:
+    internal: true
+volumes:
+  test-session:
+  test-data:

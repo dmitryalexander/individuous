@@ -1,0 +1,14 @@
+October 19, 2026 — simpler chibi replacements
+Method: built-in imagegen; transparent_background=true.
+Identity/style reference: ui/tutorial-history.png. History itself is unchanged.
+
+Final asset: ui/tutorial-restore-v2.png
+Prompt:
+Transparent PNG sticker illustration. Use the reference solely for the exact character identity, soft innocent face and hand-drawn anime style. A very small CHIBI boy with an oversized round head, tiny compact body and short stubby limbs, approximately 2.5 heads tall total. Tousled brown hair and cowlick, black rectangular glasses, warm brown eyes, loose pale gray dotted shirt, blue jeans, tiny bare feet. Quiet innocent expression, very light blush. Simple relaxed posture, full silhouette visible with margins. True transparent alpha background with absolutely no glow, halo, atmospheric cloud, shadow, scenery or floor. Clean cutout to place on a dark webpage. One character only. Standing upright with both feet planted, arms hanging loosely at his sides, head turned slightly to one side and eyes looking around with mild puzzled curiosity. One small hand-drawn amber question mark floating beside his head. Tiny closed mouth, slightly raised eyebrows. No beckoning or reaching gesture. No other symbols or text.
+
+Final asset: ui/tutorial-following-v2.png
+Prompt:
+Transparent PNG sticker illustration. Use the reference solely for the exact character identity, soft innocent face and hand-drawn anime style. A very small CHIBI boy with an oversized round head, tiny compact body and short stubby limbs, approximately 2.5 heads tall total. Tousled brown hair and cowlick, black rectangular glasses, warm brown eyes, loose pale gray dotted shirt, blue jeans, tiny bare feet. Quiet innocent expression, very light blush. Simple relaxed posture, full silhouette visible with margins. True transparent alpha background with absolutely no glow, halo, atmospheric cloud, shadow, scenery or floor. Clean cutout to place on a dark webpage. One character only. Standing naturally facing forward, feet comfortably apart, arms relaxed straight at his sides, small friendly closed-mouth smile. A calm ordinary chibi standing pose, head upright, tiny compact torso. No sitting, kneeling, leaning, cupped ear or gestures. No props, symbols or text.
+
+Transparent edge cleanup prompt (applied to each new generated image):
+undefined

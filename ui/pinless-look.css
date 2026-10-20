@@ -1,0 +1,465 @@
+/*! pinless-look-build:2026-10-15-menuboxes1 */
+/* Pinless look for Invidious (the YouTube app in MyApps). Works with pinless-look.js.
+   Colours match Pinless and the Lens Wall extension: red #b96170 download, blue #608faf creator, gray #929292 open. */
+:root{--pinless-look-build:"2026-10-15-menuboxes1";--pt-accent:#e6ad45;--pt-bg:#121212;--pt-frame:#242522;--pt-card:#1e1e1e;--pt-red:#b96170;--pt-blue:#608faf;--pt-gray:#929292;--pt-watch-w:min(100%,1280px,calc(78vh * 16 / 9))}
+
+/* Page */
+body.pt-youtube{background:var(--pt-bg)!important;color:#eee!important}
+body.pt-youtube #contents{width:100%!important;max-width:none!important;padding:0 8px!important;box-sizing:border-box}
+.pt-youtube .feed-menu,.pt-hidden{display:none!important}
+.pt-youtube .pt-playlist-heading-hidden{display:none!important}
+.pt-youtube .pt-playlist-wall{margin-top:0!important;padding-top:0!important}
+.pt-youtube #contents>.h-box:has(>hr:only-child),.pt-youtube #contents>hr{display:none!important}
+/* Walls load more by themselves; hide the page buttons' empty box once both buttons are hidden */
+.pt-youtube #contents>.h-box:has(>.page-nav-container>.page-prev-container[hidden]):has(>.page-nav-container>.page-next-container[hidden]){display:none!important}
+.pt-youtube .pt-note{display:block;text-align:center;font-size:12px;color:#aaa;margin:0 0 10px}
+/* The banner only carries pinless-refresh.js (see compose.yaml); its box stays hidden */
+.pt-youtube #contents>.h-box:has(>h3>script[src*="pinless-refresh"]){display:none!important}
+/* "Switch Invidious Instance" leads to other people's public servers; this app is your own server */
+.pt-youtube #watch-on-another-invidious-instance,.pt-youtube a[href^="https://redirect.invidious.io"],.pt-youtube .pure-u-1:has(>a[href^="https://redirect.invidious.io"]){display:none!important}
+.pt-youtube #contents>.h-box>img[src^="/ggpht/"][style*="width:100%"]{display:block;max-height:180px;object-fit:cover}
+/* Pill dropdowns: the theme's padding no longer clips their text */
+.pt-youtube select{height:auto!important;padding:.45rem 2rem .45rem .9rem!important;line-height:1.3!important}
+
+/* Header: brand and search centred like Pinless, Subscriptions and Menu at the right */
+.pt-youtube .pt-header{justify-content:center!important;gap:1rem!important;padding:21px 16px 20px!important;margin:0!important;min-height:0!important}
+.pt-youtube .pt-brand{font-size:2em!important;font-weight:700!important;line-height:1.15!important;color:#fff!important;text-decoration:none!important}
+.pt-youtube .pt-search{flex:0 1 500px!important;max-width:500px!important;min-width:180px!important}
+.pt-youtube .pt-search fieldset{flex:1;width:100%;min-width:0;margin:0;padding:0;border:0}
+.pt-youtube .pt-search input{padding:.7rem 3rem .7rem 1rem!important;font-size:16px!important;line-height:1.25!important;height:auto!important;background:#222!important;color:#fff!important;border:0!important;border-radius:24px!important}
+.pt-youtube .pt-search button{position:absolute!important;right:8px!important;top:50%!important;bottom:auto!important;transform:translateY(-50%)!important;width:30px!important;height:30px!important;padding:0!important;margin:0!important;border:0!important;border-radius:50%!important;background:#222!important;color:var(--pt-accent)!important;display:flex!important;align-items:center!important;justify-content:center!important;cursor:pointer}
+.pt-youtube .pt-search button:hover{color:#f4c76d!important}
+.pt-youtube .pt-search button svg{display:block;width:22px;height:22px}
+.pt-youtube .pt-nav{position:absolute!important;right:16px;top:50%;transform:translateY(-50%);margin:0!important;gap:14px!important}
+.pt-youtube .pt-nav-link{color:#bbb!important;text-decoration:none;font-size:13px}
+.pt-youtube .pt-nav-link:hover{color:#fff!important}
+.pt-menu>summary{padding:9px 14px!important;font-size:13px}
+.pt-menu .quiet-menu-panel{min-width:210px}
+.pt-menu .pt-menu-item{display:block!important;box-sizing:border-box;width:100%;margin:0!important;padding:10px!important;font:13px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif!important;color:#ddd!important;text-align:left;text-decoration:none;text-transform:none!important;background:none!important;border:0!important;border-radius:6px!important;cursor:pointer;-webkit-appearance:none;appearance:none}
+.pt-menu .pt-menu-item:hover,.pt-menu .pt-menu-item:focus-visible{background:#303030!important;color:#fff!important}
+.pt-menu .pt-menu-form{margin:4px 0 0;padding:4px 0 0;border-top:1px solid #333}
+.pt-menu .pt-menu-note{padding:6px 10px 8px;margin:0 0 4px;font-size:12px;color:#999;border-bottom:1px solid #333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:1099px){.pt-youtube .pt-header{justify-content:flex-start!important}.pt-youtube .pt-nav{position:static!important;transform:none!important;margin-left:auto!important}}
+@media(max-width:600px){.pt-youtube .pt-header{padding:12px 8px!important;gap:10px!important}.pt-youtube .pt-brand{font-size:24px!important}.pt-youtube .pt-search{order:3;flex:1 1 100%!important;max-width:none!important}}
+
+/* Search filters: one small pill under the header */
+.pt-youtube #filters{margin:0 0 12px!important;padding:0!important;text-align:center}
+.pt-youtube .pt-filters{display:inline-block;margin:0!important;text-align:left;max-width:100%}
+.pt-youtube .pt-filters>summary{display:inline-block;list-style:none;font-size:12px!important;color:#aaa!important;padding:6px 14px!important;background:#1e1e1e;border-radius:16px;cursor:pointer}
+.pt-youtube .pt-filters>summary::-webkit-details-marker{display:none}
+.pt-youtube .pt-filters>summary::before,.pt-youtube .pt-filters>summary::after{content:none!important}
+.pt-youtube .pt-filters[open]>summary{color:#eee!important;margin-bottom:8px}
+
+/* Wall: Pinless spacing (4px gaps; 290px columns give 6 across a 1920px window), every video in a charcoal frame */
+.pt-youtube .pt-wall.pt-wall{display:grid!important;position:static!important;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr))!important;gap:4px!important;width:100%!important;max-width:none!important;height:auto!important;margin:0!important;padding:0!important;columns:auto!important;letter-spacing:normal!important;box-sizing:border-box}
+.pt-youtube .pt-wall.pt-wall>*{position:static!important;left:auto!important;top:auto!important;width:auto!important;max-width:none!important;min-width:0;margin:0!important;box-sizing:border-box}
+.pt-card{background:var(--pt-frame)!important;border-radius:18px!important;padding:8px!important;letter-spacing:normal}
+.pt-card>.h-box{padding:0!important;margin:0!important;border-radius:0!important;background:transparent!important}
+.pt-video .video-card-row,.pt-video h5,.pt-video>.h-box>p{display:none!important}
+.pt-other .video-card-row{margin:8px 4px 2px!important}
+.pt-other p{margin:4px;font-size:13px;line-height:1.4;color:#ddd}
+.pt-other div.thumbnail,.pt-other img{border-radius:10px!important;overflow:hidden}
+/* Brick wall (pinless-look.js places each tile in the shortest column, like Pinless). Without the script the grid above stays. */
+.pt-youtube .pt-wall.pt-wall.pt-bricks{display:block!important;position:relative!important;height:var(--pt-h,auto)!important}
+.pt-youtube .pt-wall.pt-wall.pt-bricks>*{position:absolute!important;left:var(--pt-x,0px)!important;top:var(--pt-y,0px)!important;width:var(--pt-w,100%)!important}
+/* Tile shapes from each video's real shape: Shorts are tall 9:16 bricks, square videos square */
+.pt-card.pt-tall .pt-thumb.pt-thumb{aspect-ratio:9/16}
+.pt-card.pt-square .pt-thumb.pt-thumb{aspect-ratio:1/1}
+.pt-card.pt-pending .pt-thumb img{opacity:0}
+/* Tall or square tile without a tall cover picture: the wide thumbnail centred over a blurred, zoomed copy */
+.pt-card.pt-backdrop .pt-thumb img.thumbnail{object-fit:contain!important;position:relative;z-index:1}
+.pt-thumb img.pt-blur{position:absolute;inset:0;display:block;width:100%;height:100%;margin:0;object-fit:cover;filter:blur(16px) brightness(.6);transform:scale(1.25);border-radius:0;pointer-events:none}
+/* Hover preview: a silent video over the picture, under the hover zones and labels */
+.pt-thumb video.pt-preview{position:absolute;inset:0;z-index:2;display:block;width:100%;height:100%;margin:0;padding:0;object-fit:cover;border-radius:0;background:transparent;pointer-events:none;opacity:0;transition:opacity .2s}
+.pt-thumb.pt-previewing video.pt-preview{opacity:1}
+@media(prefers-reduced-motion:reduce){.pt-thumb video.pt-preview{transition:none}}
+@media(hover:none){.pt-menu .pt-preview-switch{display:none!important}}
+
+/* Video tile and hover zones */
+.pt-thumb.pt-thumb{position:relative!important;isolation:isolate;display:block;width:100%;aspect-ratio:16/9;margin:0!important;padding:0!important;border-radius:10px!important;overflow:hidden!important;background:#181818!important}
+.pt-thumb>a:not(.pt-zone){display:block;width:100%;height:100%}
+.pt-thumb img.thumbnail{display:block!important;width:100%!important;height:100%!important;margin:0!important;object-fit:cover!important;aspect-ratio:auto!important;border-radius:0!important}
+.pt-thumb .watched-overlay,.pt-thumb .watched-indicator{z-index:2!important;pointer-events:none}
+.pt-thumb .bottom-right-overlay{z-index:3!important;pointer-events:none;transition:opacity .12s}
+.pt-thumb .top-left-overlay{z-index:9!important}
+.pt-thumb .length{font:600 11px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif!important;padding:3px 6px!important;margin:0!important;border-radius:4px!important;background:#111d!important;color:#eee!important}
+.pt-zone.pt-zone{position:absolute!important;left:0;width:100%;display:block;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;min-height:0!important;font-size:0;color:transparent;cursor:pointer;z-index:4;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+.pt-zone.pt-dl{top:0;height:max(10%,16px)}
+.pt-zone.pt-ch{top:max(10%,16px);height:max(10%,16px)}
+.pt-zone.pt-open{top:max(20%,32px);bottom:0;height:auto}
+.pt-no-ch .pt-zone.pt-open{top:max(10%,16px)}
+.pt-zone.pt-dl:disabled{cursor:progress}
+.pt-zone:focus-visible{outline:none}
+.pt-thumb::after{content:'';position:absolute;inset:0;z-index:8;border:2px solid transparent;border-radius:10px;pointer-events:none;box-sizing:border-box}
+.pt-thumb:has(.pt-open:hover)::after,.pt-thumb:has(.pt-open:focus-visible)::after{border-color:var(--pt-gray)}
+.pt-thumb:has(.pt-ch:hover)::after,.pt-thumb:has(.pt-ch:focus-visible)::after{border-color:var(--pt-blue)}
+.pt-thumb:has(.pt-dl:hover)::after,.pt-thumb:has(.pt-dl:focus-visible)::after{border-color:var(--pt-red)}
+/* Videos already saved in any playlist (October 15, 2026): the gray open-video hover border is green. Blue and red zones keep their colors. */
+.pt-video.pt-in-any-list .pt-thumb:has(.pt-open:hover)::after,.pt-video.pt-in-any-list .pt-thumb:has(.pt-open:focus-visible)::after{border-color:var(--pt-green,#43b56b)}
+/* Hover text, styled like the Lens Wall labels */
+.pt-label{position:absolute;left:8px;right:8px;bottom:8px;z-index:7;padding:5px 9px;background:#181818e6;color:#eee;font:12px/1.35 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:start;unicode-bidi:plaintext;overflow-wrap:anywhere;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;opacity:0;transition:opacity .12s;pointer-events:none}
+.pt-thumb:has(.pt-dl:hover) .pt-label-title,.pt-thumb:has(.pt-dl:focus-visible) .pt-label-title,
+.pt-thumb:has(.pt-open:hover) .pt-label-title,.pt-thumb:has(.pt-open:focus-visible) .pt-label-title,
+.pt-thumb:has(.pt-ch:hover) .pt-label-channel,.pt-thumb:has(.pt-ch:focus-visible) .pt-label-channel{opacity:1}
+.pt-thumb:has(.pt-zone:hover) .bottom-right-overlay,.pt-thumb:has(.pt-zone:focus-visible) .bottom-right-overlay{opacity:0}
+.pt-status{position:absolute;left:8px;right:8px;top:50%;transform:translateY(-50%);z-index:10;padding:8px 10px;background:rgba(20,20,20,.92);color:#eee;font:13px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;pointer-events:none}
+.pt-status[hidden]{display:none!important}
+@media(prefers-reduced-motion:reduce){.pt-label,.pt-thumb .bottom-right-overlay{transition:none}}
+
+/* Watch page: player and details as one card, like a Pinless pin */
+.pt-watch #player-container{width:var(--pt-watch-w)!important;max-width:none!important;height:auto!important;margin:4px auto 0!important;padding:0!important;box-sizing:border-box;flex:none;border-radius:16px 16px 0 0;overflow:hidden;background:#000}
+.pt-watch #player-container #player,.pt-watch #player.player-dimensions.vjs-fluid{width:100%!important;height:auto!important;max-height:none!important;padding-top:0!important;aspect-ratio:16/9;border-radius:0!important}
+.pt-watch-info{width:var(--pt-watch-w);margin:0 auto 28px;box-sizing:border-box;padding:14px 20px 10px;background:var(--pt-card);border-radius:0 0 16px 16px;letter-spacing:normal}
+.pt-watch-info>.h-box{padding:0!important}
+.pt-watch-info h1{margin:2px 0 12px!important;font-size:20px!important;line-height:1.35!important;font-weight:600!important;color:#fff}
+.pt-watch-info h1 a{margin-left:6px;font-size:.85em;color:#999!important}
+.pt-watch-main{display:block!important;width:auto!important;padding:0!important;letter-spacing:normal}
+.pt-watch-main>.title{display:flex!important;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:0 0 6px!important;padding:0!important;letter-spacing:normal}
+.pt-watch-main>.title>div{width:auto!important}
+.pt-watch-main .channel-profile{display:flex;align-items:center;gap:10px}
+.pt-watch-main .channel-profile img{width:40px!important;height:40px!important;border-radius:50%!important}
+.pt-watch-main #channel-name{font-size:15px;font-weight:600;color:#eee}
+.pt-watch-main #subscribe{margin:0!important;padding:8px 18px!important;font-size:13px}
+.pt-watch-main #subscribe b,.pt-watch-main #subscribe input{font-weight:600}
+.pt-watch-main>.h-box{padding:0!important}
+.pt-watch-main #published-date{margin:4px 0 6px;font-size:13px;color:#999}
+.pt-watch-main #published-date b{font-weight:400}
+.pt-watch-main hr{display:none}
+.pt-watch-info .quiet-disclosure{margin:2px 0;font-size:14px;color:#ddd;letter-spacing:normal}
+.pt-watch-info .quiet-disclosure>summary{padding:7px 0;font-size:13px;color:#aaa}
+.pt-watch-info .quiet-disclosure[open]>summary{color:#eee}
+.pt-watch-info #description-box{font-size:14px;line-height:1.6}
+.pt-watch-info #comments{max-width:none;font-size:14px}
+.pt-watch-tools{width:auto!important;padding:0 0 8px!important}
+.pt-watch-tools>.h-box{padding:0!important}
+.pt-watch-tools p{margin:6px 0;font-size:13px}
+.pt-watch-tools #download_widget{max-width:380px}
+/* Shorts get a tall player sized to the window height, square videos a square one; the details card keeps its width */
+body.pt-watch-tall{--pt-watch-w:min(100%,max(360px,calc((100vh - 96px) * 9 / 16)))}
+body.pt-watch-square{--pt-watch-w:min(100%,1080px,max(480px,calc(100vh - 96px)))}
+.pt-watch.pt-watch-tall #player-container #player,.pt-watch.pt-watch-tall #player.player-dimensions.vjs-fluid{aspect-ratio:9/16}
+.pt-watch.pt-watch-square #player-container #player,.pt-watch.pt-watch-square #player.player-dimensions.vjs-fluid{aspect-ratio:1/1}
+/* Related videos: a full-width wall under the video, like Related Pins */
+.pt-related{width:100%;margin:0 0 12px}
+.pt-related-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:0 0 12px;padding:0 6px}
+.pt-related-head h2{margin:0;font-size:1.3rem;font-weight:600;color:#fff}
+.pt-related-head .pure-control-group{display:flex;align-items:center;gap:8px;margin:0;font-size:12px;color:#aaa}
+.pt-related-head label{font-size:12px;color:#aaa}
+.pt-related-head input[type=checkbox]{margin:0}
+.pt-related #playlist{margin:0 0 12px;padding:0 6px}
+
+/* Footer */
+.pt-footer{margin:28px 8px 12px!important;font-size:12px}
+.pt-footer>summary{font-size:12px!important;color:#888!important}
+.pt-footer footer{margin:8px 0!important;padding:8px 0!important;max-height:none!important;font-size:12px}
+
+
+/* Clicked playback keeps native sound, seek and fullscreen controls accessible. */
+.pt-thumb.pt-inline-playing video.pt-preview{pointer-events:auto;object-fit:contain;opacity:1}
+.pt-thumb.pt-inline-playing .pt-open{bottom:44px}
+.pt-thumb.pt-inline-playing .pt-label{bottom:48px}
+
+/* Subscription bricks and feed controls, October 6. */
+.pt-subscriptions{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;width:100%;padding:8px;box-sizing:border-box}
+.pt-subscription{min-width:0;margin:0!important;padding:10px!important;border-radius:28px;background:#242522;box-sizing:border-box;overflow:hidden}
+.pt-subscription>.pure-g{display:flex;flex-direction:column;gap:12px;letter-spacing:normal}
+.pt-subscription .pure-g>div{width:100%!important;text-align:center!important}
+.pt-subscription .pure-g>div:empty,.pt-subscription>hr{display:none}
+.pt-subscription h3{padding:0!important;margin:0;font:600 16px system-ui;overflow-wrap:anywhere}
+.pt-subscription a{display:flex;flex-direction:column;align-items:center;gap:12px}
+.pt-channel-letter{display:grid;place-items:center;width:100%;aspect-ratio:1;border-radius:22px;overflow:hidden;background:#313330;color:#ddd;font:500 68px system-ui}
+.pt-subscription input[type=submit]{display:inline-block!important;padding:8px 16px!important;border:1px solid #555!important;border-radius:22px!important;cursor:pointer!important;font:600 13px system-ui!important}
+.pt-hide-armed .pt-thumb{outline:3px solid #dc6578;outline-offset:-3px}
+.pt-hide-hint{position:absolute;bottom:12px;left:8px;right:8px;z-index:30;background:#722b39;color:white;border-radius:9px;padding:10px;font:600 13px system-ui;pointer-events:none}
+.pt-hidden-dialog{color:#eee;background:#202020;border:1px solid #555;border-radius:16px;width:min(700px,85vw);max-height:80vh;padding:24px;font:15px system-ui}
+.pt-hidden-dialog::backdrop{background:#000a}
+.pt-hidden-dialog button{background:#333;color:white;border:1px solid #666;border-radius:20px;padding:8px 16px;cursor:pointer}
+.pt-hidden-row{display:flex;align-items:center;justify-content:space-between;gap:20px;border-top:1px solid #444;padding:14px 0}
+.pt-hidden-row a{color:#ddd;overflow-wrap:anywhere}
+.pt-hidden-row button{flex:none}
+
+
+/* Compact Shorts occupy exactly two landscape rows, keeping the whole frame visible. */
+.pt-channel-avatar{display:block;width:100%;height:100%;aspect-ratio:1;object-fit:cover;border-radius:inherit}
+
+/* Channel order, compact subscriptions, and the active channel gap card. */
+html.pt-feed-loading #contents .pure-g:has(.thumbnail),html.pt-feed-loading #contents .page-next-container,html.pt-feed-loading #contents .page-prev-container{display:none!important}
+.pt-feed-order{border:0;margin:12px 8px 20px;padding:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pt-feed-order strong{font:600 14px system-ui;margin-right:8px;color:#ddd}
+.pt-feed-order button{border:1px solid #50514e;border-radius:20px;background:#242522;color:#ddd;padding:8px 14px;cursor:pointer}
+.pt-feed-order button[aria-pressed=true]{background:#30291c;border-color:var(--pt-accent);color:#fff}
+.pt-feed-order-note{font:12px system-ui;color:#aaa;margin-left:6px}
+.pt-subscription .pt-unsubscribe-name{display:block;width:100%;border:1px solid transparent!important;border-radius:18px!important;margin:0!important;padding:10px 6px!important;background:transparent!important;color:#eee!important;font:600 14px system-ui!important;white-space:normal;text-align:center;cursor:pointer;transition:background .15s,border-color .15s}
+.pt-subscription .pt-unsubscribe-name:hover,.pt-subscription .pt-unsubscribe-name:focus-visible{background:#722b39!important;border-color:#dc6578!important;color:white!important}
+.pt-subscription .pure-g{gap:4px}
+.pt-subscription .pt-channel-avatar{border-radius:22px!important}
+.pt-playing-channel{position:absolute!important;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:#242522;border-radius:24px;padding:12px;color:#eee!important;text-decoration:none;overflow:hidden;z-index:1;font:600 14px system-ui;text-align:center}
+.pt-playing-channel:hover{background:#30322e}
+.pt-playing-avatar{display:flex;align-items:center;justify-content:center;min-height:0;width:100%;flex:1;font-size:40px;overflow:hidden}
+.pt-playing-avatar img{height:100%;max-height:220px;max-width:100%;aspect-ratio:1;object-fit:cover;border-radius:20px}
+
+/* Shared image-only channel boards and full-field pending removal. */
+.pt-subscriptions{gap:4px;padding:0}
+.pt-subscription{position:relative;padding:0!important;border-radius:22px}
+.pt-subscription .pure-g{gap:0}
+.pt-subscription .pure-g>div:has(form){display:none!important}
+.pt-subscription a{position:relative;gap:0;overflow:hidden;border-radius:22px}
+.pt-channel-name{position:absolute;bottom:8px;left:0;right:0;padding:8px 10px;background:#171717e8;color:#eee;font:500 13px/1.4 system-ui;opacity:0;pointer-events:none;text-align:center}
+.pt-subscription:hover .pt-channel-name{opacity:1}
+.pt-video [data-onclick="mark_unwatched"]{display:none!important}
+.pt-hide-armed .pt-thumb{background:#722b39!important;outline:2px solid #dc6578;outline-offset:-2px}
+body:not(.pt-history-page):not(.pt-feed-page):not(.pt-search-page) .pt-hide-armed .pt-thumb>*{opacity:0!important}
+.pt-hide-armed .pt-thumb::after{border-color:#dc6578!important}
+.pt-hide-hint{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+.pt-subscription.pt-hide-armed::after{content:'';position:absolute;inset:0;z-index:2;border-radius:inherit;background:rgba(180,43,65,.55);box-shadow:inset 0 0 0 2px #dc6578;pointer-events:none}
+
+/* History uses the same edge-to-edge hover title and translucent removal field. */
+:is(.pt-history-page,.pt-feed-page,.pt-search-page,.pt-watch,.pt-star-page) .pt-label-title{left:0;right:0;padding:8px 10px;background:#171717e8;font:500 13px/1.4 system-ui;text-align:center}
+:is(.pt-history-page,.pt-feed-page,.pt-search-page,.pt-watch,.pt-star-page) .pt-label-channel{display:none}
+:is(.pt-history-page,.pt-feed-page,.pt-search-page,.pt-watch,.pt-star-page) .pt-video:hover .pt-label-title{opacity:1}
+:is(.pt-history-page,.pt-feed-page,.pt-search-page) .pt-hide-armed .pt-thumb{background:#181818!important;outline:0}
+
+:is(.pt-history-page,.pt-feed-page,.pt-search-page) .pt-hide-armed .pt-thumb::before{content:'';position:absolute;inset:0;z-index:20;border-radius:inherit;background:rgba(180,43,65,.55);box-shadow:inset 0 0 0 2px #dc6578;pointer-events:none}
+/* Serious viewing advisory while the first feed batch loads. */
+.pt-youtube footer,.pt-youtube .pt-footer{display:none!important}
+.pt-loading-warning{box-sizing:border-box;min-height:calc(100svh - 100px);padding:28px 20px 48px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#efe5cf;text-align:center;font-family:Arial,Helvetica,sans-serif}
+.pt-loading-warning[hidden]{display:none!important}
+.pt-warning-art{position:relative;width:min(340px,68vw);aspect-ratio:1068 / 747;overflow:hidden;flex-shrink:0}
+.pt-warning-art>img{position:absolute;display:block;width:117.42%;max-width:none;height:auto;max-height:none;left:-8.52%;top:-36.14%;background:transparent;border-radius:0;transform:none}
+.pt-loading-warning h1{color:#fff;font-size:clamp(44px,8vw,88px);font-weight:900;letter-spacing:.1em;line-height:1;margin:12px 0 18px;padding-left:.1em}
+.pt-warning-rating{display:grid;grid-template-columns:195px minmax(0,1fr);grid-template-rows:auto auto auto;color:#fff;border:3px solid currentColor;width:min(800px,100%);border-radius:16px;overflow:hidden;box-sizing:border-box;text-align:justify;text-justify:inter-word}
+.pt-warning-grade{grid-column:1;grid-row:1 / 3;box-sizing:border-box;min-height:0;border-right:3px solid currentColor;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;text-align:center}
+.pt-warning-grade>strong{font-size:124px;font-weight:900;line-height:.95;letter-spacing:-8px}
+.pt-warning-grade>span{font-size:14px;line-height:1;font-weight:700;margin-top:6px;white-space:nowrap}
+.pt-warning-heading{grid-column:2;display:flex;align-items:center;justify-content:center;border-bottom:3px solid currentColor;padding:8px 10px;font-size:14px;line-height:1.15;text-align:center;letter-spacing:.025em}
+.pt-warning-body{grid-column:2;min-width:0}
+.pt-warning-rating p{font-size:12px;line-height:1.35;margin:8px 10px;text-align:justify;hyphens:auto}
+.pt-warning-rating .pt-warning-fine{grid-column:1 / -1;border-top:3px solid currentColor;padding:8px 12px;margin:0;font-size:11px;line-height:1.3;font-weight:700;letter-spacing:.015em}
+.pt-initial-loading{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%);padding:0!important;margin:0!important}
+@media(max-width:700px){.pt-warning-rating{grid-template-columns:30% minmax(0,1fr)}.pt-warning-grade{min-height:0;padding:8px}.pt-warning-grade>strong{font-size:clamp(48px,14vw,100px);letter-spacing:-4px}.pt-warning-grade>span{font-size:clamp(8px,1.9vw,13px);margin-top:6px}.pt-loading-warning{padding:24px 16px 36px}.pt-warning-heading{font-size:13px;padding:8px}.pt-warning-rating p{font-size:12px;margin:8px}.pt-warning-rating .pt-warning-fine{margin:0;padding:8px;font-size:10px}}
+/* History begins directly below the search bar; confirmation covers every loaded tile. */
+.pt-history-page .pt-history-toolbar{display:none!important}
+.pt-history-clear-armed .pt-video .pt-thumb::before{content:'';position:absolute;inset:0;z-index:20;border-radius:inherit;background:rgba(180,43,65,.55);box-shadow:inset 0 0 0 2px #dc6578;pointer-events:none}
+.pt-history-clear-notice{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:10000;max-width:calc(100vw - 40px);box-sizing:border-box;padding:12px 18px;border:1px solid #dc6578;border-radius:10px;background:#242020;color:#fff;font:14px/1.4 system-ui;text-align:center}
+.pt-history-clear-notice[hidden]{display:none}
+
+/* Search cards retain duration data for previews without displaying badges. */
+.pt-search-page .pt-thumb .length{display:none!important}
+
+/* Keep moving video unobstructed; paused cards retain their hover titles. */
+.pt-thumb.pt-inline-playing.pt-media-playing .pt-label{opacity:0!important;transition:none}
+
+/* Centered loading ring, separate from the red removal overlay. */
+.pt-preview-loader{position:absolute;left:50%;top:50%;z-index:19;width:36px;height:36px;box-sizing:border-box;margin:-18px 0 0 -18px;border:3px solid #ffffff50;border-top-color:#fff;border-right-color:#fff;border-radius:50%;background:#0002;box-shadow:0 0 0 5px #0003;pointer-events:none;animation:pt-preview-spin .75s linear infinite}
+@keyframes pt-preview-spin{to{transform:rotate(360deg)}}
+/* Keep this loading feedback animated even when system animations are disabled. */
+
+/* Icon navigation and the Star collection use the shared wall. */
+.pt-nav .pt-circle,.pt-menu>summary{display:inline-flex!important;align-items:center;justify-content:center;padding:0!important;width:38px;height:38px;box-sizing:border-box}
+.pt-brand{display:inline-flex;align-items:center;justify-content:center}
+.pt-nav svg{flex-shrink:0}.pt-star-link[aria-current=page]{color:#e6bd62!important}
+.pt-star-heading{font:600 18px system-ui;margin:12px 8px 6px}#pt-star-note{font:13px system-ui;color:#aaa;margin:6px 8px 18px}
+@media(max-width:600px){.pt-youtube .pt-nav{gap:6px!important}.pt-nav .pt-circle,.pt-menu>summary{width:34px;height:34px}}
+
+.pt-list-controls{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:12px 8px;font:13px system-ui}
+.pt-list-controls label,.pt-list-controls form{display:flex;align-items:center;gap:8px;margin:0;flex-wrap:wrap}
+.pt-list-controls select{max-width:260px}.pt-list-controls input{min-width:0;width:180px;background:#242522;color:#eee;border:1px solid #444;border-radius:20px;padding:9px 12px}
+.pt-list-controls button{background:#242522;color:#eee;border:1px solid #444;border-radius:20px;padding:9px 14px;cursor:pointer}
+.pt-thumb .pt-list-flash{position:absolute;inset:0;z-index:21;pointer-events:none;border-radius:inherit;animation:pt-list-feedback .12s steps(1,end) 2 forwards}
+.pt-list-added{background:rgba(45,180,100,.55);box-shadow:inset 0 0 0 2px #62d38e}
+.pt-list-removed{animation-duration:.12s!important;animation-iteration-count:2!important;background:rgba(55,125,220,.55);box-shadow:inset 0 0 0 2px #79b0ef}
+@keyframes pt-list-feedback{0%{opacity:1}50%,100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.pt-thumb .pt-list-flash{animation-timing-function:steps(1,end)}}
+
+/* A lighter persistent frame identifies videos in the active list. */
+.pt-card.pt-in-active-list{background:#555650!important;box-shadow:inset 0 0 0 3px #555650,inset 0 0 0 4px #a0a19a!important}
+.pt-star-link{order:-1}
+
+/* Outline home mark matches the navigation line icons. */
+.pt-youtube .pt-brand{color:#ccc!important}
+.pt-youtube .pt-brand:hover,.pt-youtube .pt-brand:focus-visible{color:#fff!important}
+
+/* A static pause mark during the hover intent delay; spin only while loading. */
+.pt-preview-loader.pt-preview-wait{animation:none;border:0;border-radius:0;background:linear-gradient(to right,#fff 0 32%,transparent 32% 68%,#fff 68%);width:20px;height:26px;margin:-13px 0 0 -10px;box-shadow:none;filter:drop-shadow(0 1px 3px #000)}
+
+/* Centered search keeps Enter submission and removes the visual submit icon. */
+body.pt-youtube .pt-header .pt-search input[name="q"]{text-align:center!important;padding-left:12px!important;padding-right:12px!important}
+body.pt-youtube .pt-header .pt-search input[name="q"]::placeholder{text-align:center}
+body.pt-youtube .pt-header .pt-search button{display:none!important}
+
+/* Compact channel profile bar. */
+.pt-channel-bar{display:flex;align-items:center;gap:14px;margin:8px 8px 10px;position:relative;z-index:3;flex-wrap:wrap;font:13px system-ui}
+.pt-channel-about{position:relative;flex:none}
+.pt-channel-about>summary{display:grid;place-items:center;list-style:none;width:60px;height:60px;border-radius:16px;cursor:pointer;background:#242522;overflow:hidden;transition:box-shadow .15s,transform .15s}
+.pt-channel-about>summary::-webkit-details-marker{display:none}
+.pt-channel-about>summary:hover,.pt-channel-about>summary:focus-visible{box-shadow:0 0 0 2px var(--pt-accent);transform:translateY(-1px)}
+.pt-channel-about>summary img{width:100%!important;height:100%!important;object-fit:cover;border-radius:16px!important;margin:0!important}
+.pt-channel-panel{display:none;position:absolute;left:0;top:68px;width:min(440px,calc(100vw - 48px));box-sizing:border-box;padding:18px;background:#242522;border:1px solid #50514e;border-radius:18px;box-shadow:0 12px 32px #0009;color:#eee;font:14px/1.5 system-ui;max-height:65vh;overflow:auto}
+.pt-channel-about[open] .pt-channel-panel,.pt-channel-about:hover .pt-channel-panel,.pt-channel-about:focus-within .pt-channel-panel{display:block}
+.pt-channel-panel:before{content:'';position:absolute;top:-10px;left:0;width:100%;height:10px}
+.pt-channel-panel strong{font-size:18px}
+.pt-channel-tabs,.pt-channel-sorts{display:flex;align-items:center;gap:5px}
+.pt-channel-bar :is(.pt-channel-tabs,.pt-channel-sorts)>*{white-space:nowrap;border:1px solid #41423e;border-radius:18px;padding:7px 11px;color:#ccc;background:#222320;text-decoration:none;font-weight:500}
+.pt-channel-bar [aria-current=page]{border-color:var(--pt-accent);color:#fff;background:#30291c}
+.pt-channel-bar a:hover{color:#fff;background:#33352f}
+.pt-channel-bar .pt-feed-order{margin:0;padding:0;gap:5px}
+.pt-channel-bar .pt-feed-order strong{font-size:12px;margin-right:2px;color:#aaa}
+.pt-channel-bar .pt-feed-order button{font:12px system-ui;padding:7px 10px}
+.pt-channel-bar .pt-feed-order-note{display:none}
+.pt-channel-bar .pt-channel-actions{margin-left:auto;width:auto;gap:8px;display:flex;align-items:center}
+.pt-channel-bar .pt-channel-actions .pure-button{font:12px system-ui;padding:8px 12px;white-space:nowrap}
+.pt-channel-page #contents>.h-box:has(>hr){display:none}
+@media(max-width:700px){.pt-channel-bar{gap:8px}.pt-channel-about>summary{width:48px;height:48px}.pt-channel-bar .pt-channel-actions{margin-left:0}.pt-channel-bar .pt-feed-order{flex-wrap:wrap}.pt-channel-sorts{margin-left:auto}}
+.pt-channel-bar .pt-channel-tabs,.pt-channel-bar .pt-channel-sorts{margin:0;padding:0;flex:0 0 auto;width:auto;min-height:0}
+/* Channel identity flanks the clickable banner; three balanced option groups. */
+.pt-channel-hero{--channel-size:clamp(72px,9vw,150px);display:grid;grid-template-columns:var(--channel-size) minmax(0,1fr) var(--channel-size);gap:10px;margin:8px 8px 0;position:relative;z-index:4}
+.pt-channel-hero .pt-channel-about>summary{width:var(--channel-size);height:var(--channel-size);border-radius:20px}
+.pt-channel-hero .pt-channel-about>summary img{border-radius:20px!important}
+.pt-channel-hero .pt-channel-panel{top:calc(var(--channel-size) + 8px)}
+.pt-channel-banner{display:block;height:var(--channel-size);border-radius:20px;overflow:hidden;background:#242522}
+.pt-channel-banner img{display:block;width:100%!important;height:100%!important;object-fit:cover;border-radius:20px}
+.pt-channel-banner:hover,.pt-channel-banner:focus-visible{outline:2px solid var(--pt-accent);outline-offset:2px}
+.pt-channel-follow,.pt-channel-follow form{height:var(--channel-size);margin:0;padding:0}
+.pt-channel-hero .pt-channel-follow #subscribe{display:grid!important;place-items:center;box-sizing:border-box;width:var(--channel-size);height:var(--channel-size);margin:0!important;padding:0!important;background:#30291c!important;color:var(--pt-accent)!important;border:1px solid #776039!important;border-radius:20px!important;font-size:0!important;cursor:pointer}
+.pt-channel-follow #subscribe b{display:none}
+.pt-channel-follow #subscribe svg{width:48%;height:48%}
+.pt-channel-follow #subscribe[aria-pressed=true] .pt-follow-plus{display:none}
+.pt-channel-hero .pt-channel-follow #subscribe:hover,.pt-channel-hero .pt-channel-follow #subscribe:focus-visible{background:#49391e!important;border-color:var(--pt-accent)!important;box-shadow:0 0 0 1px var(--pt-accent)}
+.pt-channel-bar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:8px 8px 10px}
+.pt-channel-bar .pt-channel-tabs,.pt-channel-bar .pt-channel-sorts,.pt-channel-bar .pt-feed-order{display:flex;justify-content:center;align-items:center;gap:8px;padding:5px 8px;min-width:0;flex-wrap:nowrap}
+.pt-channel-bar>*+*{border-left:2px dotted #73603e}
+.pt-channel-bar .pt-feed-order strong,.pt-channel-bar .pt-feed-order-note{display:none}
+@media(max-width:700px){.pt-channel-hero{gap:6px}.pt-channel-bar :is(.pt-channel-tabs,.pt-channel-sorts,.pt-feed-order){flex-direction:column;gap:5px;padding:4px}.pt-channel-bar :is(.pt-channel-tabs,.pt-channel-sorts,.pt-feed-order)>:is(a,b,button){box-sizing:border-box;width:100%;text-align:center;font-size:11px;padding:6px 3px}}
+/* Dotted horizontal rail fills the space around all three option groups. */
+.pt-channel-bar{margin-left:-8px;margin-right:-8px}
+.pt-channel-bar>*+*{border-left:0}
+.pt-channel-bar .pt-channel-tabs,.pt-channel-bar .pt-channel-sorts,.pt-channel-bar .pt-feed-order{padding-left:0;padding-right:0;gap:8px}
+.pt-channel-bar>nav::before,.pt-channel-bar>nav::after,.pt-channel-bar>.pt-feed-order::before,.pt-channel-bar>.pt-feed-order::after{content:'';flex:1 1 0;min-width:4px;border-top:2px dotted #73603e}
+@media(max-width:700px){.pt-channel-bar>nav::before,.pt-channel-bar>nav::after,.pt-channel-bar>.pt-feed-order::before,.pt-channel-bar>.pt-feed-order::after{width:100%;flex:none}.pt-channel-bar{gap:8px}}
+/* Circular channel portrait with subscription status; banner reaches the edge. */
+.pt-channel-hero{grid-template-columns:var(--channel-size) minmax(0,1fr);margin-right:-8px}
+.pt-channel-hero .pt-channel-follow{display:none}
+.pt-channel-hero .pt-channel-about>summary{box-sizing:border-box;border:3px solid #579de8;border-radius:25%;padding:3px;background:#111}
+.pt-channel-hero .pt-channel-about[data-subscribed=true]>summary{border-color:#62c984}
+.pt-channel-hero .pt-channel-about>summary img{border-radius:25%!important}
+.pt-channel-hero .pt-channel-about>summary:hover,.pt-channel-hero .pt-channel-about>summary:focus-visible{box-shadow:0 0 0 2px #579de844}
+.pt-channel-hero .pt-channel-about[data-subscribed=true]>summary:hover,.pt-channel-hero .pt-channel-about[data-subscribed=true]>summary:focus-visible{box-shadow:0 0 0 2px #62c98444}
+.pt-channel-hero .pt-channel-banner,.pt-channel-hero .pt-channel-banner img{border-top-right-radius:0;border-bottom-right-radius:0}
+/* The portrait itself is the accessible subscription toggle. */
+.pt-channel-hero .pt-channel-avatar-toggle{display:grid;place-items:center;box-sizing:border-box;width:var(--channel-size);height:var(--channel-size);margin:0;padding:3px;border:3px solid #579de8!important;border-radius:25%!important;background:#111!important;overflow:hidden;cursor:pointer}
+.pt-channel-hero .pt-channel-avatar-toggle img{width:100%!important;height:100%!important;object-fit:cover;border-radius:25%!important;margin:0}
+.pt-channel-hero .pt-channel-about[data-subscribed=true] .pt-channel-avatar-toggle{border-color:#62c984!important}
+.pt-channel-avatar-toggle:hover{filter:brightness(1.12)}
+.pt-channel-avatar-toggle:focus-visible{outline:2px solid white;outline-offset:3px}
+/* Match the header's airy, muted dotted connectors exactly. */
+.pt-channel-bar>nav::before,.pt-channel-bar>nav::after,.pt-channel-bar>.pt-feed-order::before,.pt-channel-bar>.pt-feed-order::after{border:0;height:2px;background:radial-gradient(circle,#71634b 1px,transparent 1.2px) left center/7px 2px repeat-x;opacity:.65}
+.pt-channel-avatar-toggle,.pt-channel-banner{position:relative}
+.pt-channel-unsubscribe-flash::after{content:'';position:absolute;inset:0;border-radius:inherit;background:rgba(180,43,65,.55);pointer-events:none;animation:pt-channel-unsubscribe-feedback .5s ease-out forwards}
+@keyframes pt-channel-unsubscribe-feedback{0%,35%{opacity:1}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.pt-channel-unsubscribe-flash::after{animation-timing-function:steps(1,end)}}
+/* Restore the banner's inset rounded end and acknowledge subscribing in green. */
+.pt-channel-hero{margin-right:8px}
+.pt-channel-hero .pt-channel-banner,.pt-channel-hero .pt-channel-banner img{border-radius:20px}
+.pt-channel-subscribe-flash::after{content:'';position:absolute;inset:0;border-radius:inherit;background:rgba(45,180,100,.55);pointer-events:none;animation:pt-channel-unsubscribe-feedback .5s ease-out forwards}
+@media(prefers-reduced-motion:reduce){.pt-channel-subscribe-flash::after{animation-timing-function:steps(1,end)}}
+/* Slimmer channel options toolbar. */
+.pt-channel-bar{margin-top:5px;margin-bottom:6px;font-size:12px}
+.pt-channel-bar .pt-channel-tabs,.pt-channel-bar .pt-channel-sorts,.pt-channel-bar .pt-feed-order{padding-top:2px;padding-bottom:2px;gap:6px}
+.pt-channel-bar :is(.pt-channel-tabs,.pt-channel-sorts)>*,.pt-channel-bar .pt-feed-order button{font:500 11px/1.2 system-ui;padding:5px 10px;border-radius:15px}
+@media(max-width:700px){.pt-channel-bar :is(.pt-channel-tabs,.pt-channel-sorts,.pt-feed-order)>:is(a,b,button){font-size:11px;padding:5px 3px}}
+/* Use the exact playlist feedback rhythm for click and keyboard subscriptions. */
+.pt-channel-unsubscribe-flash::after,.pt-channel-subscribe-flash::after{animation:pt-list-feedback .12s steps(1,end) 2 forwards}
+.pt-channel-subscribe-flash::after{box-shadow:inset 0 0 0 2px #62d38e}
+.pt-channel-unsubscribe-flash::after{box-shadow:inset 0 0 0 2px #dc6578}
+/* Channel pages only expose content tabs and the current page's sorting. */
+.pt-channel-bar{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* A selects a video for moving to another playlist. */
+.pt-star-page .pt-move-selected .pt-thumb::after{content:'';position:absolute;inset:0;z-index:31;background:rgba(55,125,220,.45);box-shadow:inset 0 0 0 3px #79b0ef;border-radius:inherit;pointer-events:none}
+.pt-list-bar.pt-move-targets [data-list-id]:hover{border-color:#79b0ef!important;background:#243d60!important;color:white!important}
+/* Selected video shares the dense related wall; details remain attached. */
+.pt-watch-featured{min-width:0;box-sizing:border-box;grid-column:span 2;background:#1e1e1e;overflow:hidden}
+.pt-watch .pt-watch-featured #player-container{width:100%!important;margin:0!important;border-radius:0}
+.pt-watch-featured .pt-watch-info{width:100%;margin:0;padding:8px 10px;border-radius:0}
+.pt-watch-featured .pt-watch-info h1{font-size:16px!important;line-height:1.3!important;margin:0 0 7px!important}
+.pt-watch-featured .pt-watch-main>.title{gap:6px;margin:0!important}
+.pt-watch-featured .channel-profile img{width:28px!important;height:28px!important}
+.pt-watch-featured .pt-watch-main #subscribe{padding:5px 12px!important;font-size:12px}
+.pt-watch-featured .pt-related-head{margin:0;padding:0;gap:4px}
+.pt-watch-featured .pt-related-head h2{display:none}
+.pt-watch-featured .pt-watch-main #published-date{font-size:11px}
+.pt-watch-featured .quiet-disclosure>summary{padding:4px 0;font-size:11px}
+@media(max-width:590px){.pt-watch-featured{grid-column:span 1}}
+.pt-watch .pt-watch-creator{--channel-size:clamp(56px,6vw,96px);grid-template-columns:var(--channel-size) minmax(0,1fr);margin:0 0 8px;background:var(--pt-bg)}
+.pt-watch .pt-watch-creator .pt-channel-banner{display:flex;align-items:center;justify-content:center;color:#eee}
+.pt-watch-featured{grid-column:span 3}
+.pt-watch-featured .pt-watch-info{padding:6px 9px}
+.pt-watch-featured .pt-watch-info h1{font-size:15px!important;margin:0!important}
+.pt-watch-featured .pt-watch-info .pt-watch-extra-details{margin:0}
+.pt-watch #player-container{position:relative}
+.pt-watch #player-container .vjs-big-play-button{display:none!important}
+.pt-main-download{position:absolute;top:0;left:0;width:100%;height:10%;min-height:24px;border:0;padding:0;margin:0;background:transparent;z-index:15;cursor:pointer}
+.pt-main-download.pt-main-download{border-radius:0!important;background:transparent!important;box-shadow:none!important;border:0!important;outline:none}
+.pt-watch-featured{overflow:visible}
+.pt-watch .pt-watch-creator .pt-channel-avatar-toggle:focus-visible{outline-offset:-3px}
+.pt-watch .pt-watch-creator .pt-channel-banner:is(:hover,:focus-visible){outline-offset:-2px}
+.pt-watch-featured .pt-watch-info h1{display:none!important}
+#player-container:has(.pt-main-download:is(:hover,:focus-visible))::after{content:'';position:absolute;inset:0;border:2px solid var(--pt-red);border-radius:10px;pointer-events:none;z-index:16}
+.pt-main-title{left:0;right:0;bottom:48px;padding:8px 10px;background:#171717e8;font:500 13px/1.4 system-ui;text-align:center}
+#player-container:has(.pt-main-download:is(:hover,:focus-visible)) .pt-main-title{opacity:1}
+.pt-watch-more{display:flex;align-items:center;justify-content:center;gap:12px;padding:20px;font-size:13px;color:#bbb}
+.pt-watch-more button{border:1px solid #444;border-radius:20px;padding:8px 16px;background:#242522;color:#eee;cursor:pointer}
+@media(max-width:590px){.pt-watch-featured{grid-column:span 1}}
+/* Watch page (2026-10-12): like a Pinless pin page, the creator's name replaces the search terms. */
+body.pt-watch-creator-page .pt-header>.pt-interest-bar{display:none!important}
+.pt-watch-creator-card:is(:hover,:focus-visible){filter:brightness(1.1);outline:none}
+.pt-watch-creator-nav{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.pt-watch-creator-nav::before,.pt-watch-creator-nav::after{content:'';flex:1;min-width:8px;height:2px;background:radial-gradient(circle,#71634b 1px,transparent 1.2px) left center/7px 2px repeat-x;opacity:.65}
+.pt-watch-creator-card{display:block;min-width:0;max-width:70%;padding:6px 20px;border-radius:24px;background:#e6ad45;color:#111!important;font:12px/16px system-ui;text-align:center;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pt-watch-featured .pt-watch-info{display:none!important}
+@media(max-width:600px){.pt-watch-creator-nav{order:4;flex-basis:100%}}
+/* Typographic cover for creators without a usable image. */
+.creator-name-banner{box-sizing:border-box;position:relative;isolation:isolate;display:flex!important;align-items:center;justify-content:center;overflow:hidden;padding:18px 32px;background:radial-gradient(ellipse at 85% 15%,#bb853d36,transparent 60%),linear-gradient(115deg,#191b1b,#30291e 58%,#51402a);border:1px solid #b9925140;color:#f5dfb4!important;text-decoration:none!important}
+.creator-name-banner::before{content:'';position:absolute;z-index:-1;width:65%;height:260%;right:-16%;top:-75%;border:1px solid #e6ad4533;border-radius:50%;transform:rotate(-25deg);box-shadow:0 0 0 22px #e6ad4507,0 0 0 44px #e6ad4507}
+.creator-name-banner::after{content:'';position:absolute;left:24px;right:24px;bottom:13px;height:1px;background:linear-gradient(90deg,transparent,#e6ad4566,transparent)}
+.creator-name-banner>span{max-width:100%;font:800 clamp(22px,3.6vw,62px)/1.05 system-ui,-apple-system,'Segoe UI',sans-serif;letter-spacing:-.035em;text-align:center;overflow-wrap:anywhere;text-wrap:balance;text-shadow:0 2px 14px #0005}
+@media(max-width:600px){.creator-name-banner{padding:10px 14px}.creator-name-banner>span{font-size:clamp(16px,5vw,28px)}.creator-name-banner::after{bottom:7px;left:12px;right:12px}}
+/* pt-sticky-header: the top bar stays at the top while scrolling, like Pinless */
+body.pt-youtube .pt-header{position:sticky!important;top:0!important;z-index:1000!important;background:#121212!important}
+
+/* Inline playback (2026-10-10): no title bar over the playing video, so the volume and other controls stay reachable. */
+.pt-thumb.pt-inline-playing .pt-label,.pt-thumb.pt-inline-playing .pt-label *{display:none!important}
+/* + and - volume note */
+.pt-volume-note{position:absolute;top:12px;left:50%;z-index:20;transform:translateX(-50%);padding:5px 12px;border-radius:999px;background:#181818e6;color:#fff;font:600 13px/1.3 system-ui;pointer-events:none;opacity:0;transition:opacity .2s}
+.pt-volume-note.pt-volume-show{opacity:1;transition:none}
+
+/* Watch page (2026-10-14): a square or tall picture inside a 16:9 video is cropped to its real shape,
+   and a square player takes two columns, never taller than the window. Fullscreen shows the whole frame. */
+body.pt-watch-cropped #player-container video{object-fit:cover!important}
+body.pt-watch-cropped #player-container .vjs-fullscreen video,body.pt-watch-cropped #player-container video:fullscreen{object-fit:contain!important}
+.pt-watch.pt-watch-square .pt-watch-featured #player-container{width:min(100%,calc(100vh - 150px))!important;margin:0 auto!important}
+
+/* Feed order badge on a followed creator's picture (2026-10-14): click cycles Random / Newest first / Oldest first. */
+.pt-channel-about{position:relative}
+/* Playlist tiles (2026-10-15): picture end to end, no text under it, title in a centered dark bar on hover. */
+.pt-playlist .video-card-row{display:none!important}
+.pt-playlist>.h-box>div.thumbnail{position:relative;display:block;margin:0;overflow:hidden;border-radius:10px!important}
+.pt-playlist div.thumbnail a{display:block}
+.pt-playlist div.thumbnail img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.pt-playlist .pt-label-title{left:0;right:0;bottom:0;padding:8px 10px;background:#171717e8;font:500 13px/1.4 system-ui;text-align:center}
+.pt-playlist:hover .pt-label-title{opacity:1}
+.pt-playlist div.thumbnail .bottom-right-overlay{z-index:3;pointer-events:none;transition:opacity .12s}
+.pt-playlist:hover div.thumbnail .bottom-right-overlay{opacity:0}
+.pt-playlist div.thumbnail::after{content:'';position:absolute;inset:0;z-index:8;border:2px solid transparent;border-radius:10px;pointer-events:none;box-sizing:border-box}
+.pt-playlist:hover div.thumbnail::after{border-color:var(--pt-gray)}
+/* Feed order group (2026-10-15): third section of the creator bar, three round icons sized like the pills (25px). Four equal dotted spaces. */
+body.pt-channel-page.pt-youtube .pt-header>.pt-channel-bar{grid-template-columns:repeat(3,minmax(0,1fr) auto) minmax(0,1fr)}
+body.pt-channel-page.pt-youtube .pt-header .pt-channel-bar>.pt-channel-order{grid-column:6;display:flex;align-items:center;justify-content:center;gap:5px;padding:0;min-width:0}
+body.pt-channel-page .pt-header .pt-channel-bar .pt-order-opt{all:unset;display:grid!important;place-items:center;box-sizing:border-box;flex:0 0 auto;width:25px!important;height:25px!important;margin:0!important;padding:0!important;border:.8px solid #41423e!important;border-radius:50%!important;background:#222320!important;color:#ccc!important;cursor:pointer}
+body.pt-channel-page .pt-header .pt-channel-bar .pt-order-opt svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+body.pt-channel-page .pt-header .pt-channel-bar .pt-order-opt:is(:hover,:focus-visible){border-color:var(--pt-accent,#e6ad45)!important;color:#fff!important}
+body.pt-channel-page .pt-header .pt-channel-bar .pt-order-opt[aria-pressed=true]{background:#e6ad45!important;border-color:#e6ad45!important;color:#17140e!important;box-shadow:0 0 10px #e6ad458c}
+.pt-order-tip{gap:3px!important;max-width:280px;padding:9px 12px!important;pointer-events:none}
+.pt-order-tip strong{font:600 13px/1.3 system-ui;color:#fff}
+.pt-order-tip span{font:12px/1.35 system-ui;color:#cfcfcf}
+.pt-order-tip small{font:11px/1.35 system-ui;color:#8d8d8d}

@@ -1,0 +1,18 @@
+
+/* Autoplay and Loop switches on the video (2026-10-14). */
+.video-js .vjs-control.pt-player-switch{cursor:pointer;width:3.4em}
+.video-js .vjs-control.pt-player-switch.pt-autoplay{width:4.4em}
+/* YouTube player style lays the control bar out with CSS order; sit just before the captions button. */
+.video-js.player-style-youtube .vjs-control.pt-player-switch{order:2}
+.video-js .pt-player-switch .vjs-icon-placeholder{display:flex;align-items:center;justify-content:center;position:absolute;inset:0;font-size:1em}
+.video-js .pt-player-switch .vjs-icon-placeholder::before{content:none!important}
+.video-js .pt-player-switch svg{display:block;width:1.7em;height:1.7em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+.video-js .pt-player-switch:hover svg,.video-js .pt-player-switch:focus-visible svg{opacity:1}
+.video-js .pt-player-switch[aria-pressed="true"]{color:#e6ad45}
+.video-js .pt-player-switch.pt-autoplay svg{width:2.7em;height:1.6em;stroke:none}
+.video-js .pt-sw-track{fill:rgba(255,255,255,.35)}
+.video-js .pt-sw-knob{transition:transform .15s;fill:#eee}
+.video-js .pt-sw-knob path{fill:#222}
+.video-js .pt-autoplay[aria-pressed="true"] .pt-sw-track{fill:#e6ad45}
+.video-js .pt-autoplay[aria-pressed="true"] .pt-sw-knob{transform:translateX(18px)}
+@media(prefers-reduced-motion:reduce){.video-js .pt-sw-knob{transition:none}}

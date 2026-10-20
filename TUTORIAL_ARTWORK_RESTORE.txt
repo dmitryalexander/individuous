@@ -1,0 +1,6 @@
+Restore Feed tutorial artwork — October 19, 2026
+Method: built-in imagegen; transparent_background=true.
+Reference: ui/tutorial-welcome.png (character identity and style).
+Final asset: ui/tutorial-restore.png
+Prompt:
+Create a transparent PNG tutorial illustration using the reference as the exact character identity and hand-drawn chibi anime style. Same tousled brown hair and cowlick, warm brown eyes, black rectangular glasses, pale gray dotted loose shirt, blue jeans, bare feet. NEW UNIQUE POSE for Restore Feed: full body kneeling on one knee, torso turned slightly back, looking warmly over his shoulder at the viewer; one hand reaches back in a friendly beckoning gesture as if inviting you to return to where you left off, the other rests on his raised knee. Clear readable silhouette, gentle reassuring smile. Entire hair, hands and feet inside frame, modest margins. One character only. True transparent alpha background, no backdrop, floor, shadow, halo or glow. No objects, symbols, words, arrows, thought bubbles or panels. Clean cutout for an almost-black app background.

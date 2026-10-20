@@ -1,0 +1,145 @@
+{
+  "upstream_revision": "48c6110a83fc788b4199daf737279b71950cc0db",
+  "installed_ui_inputs": [
+    {
+      "source": "theme.css",
+      "sha256": "b0a2ae06d9f322dd7e0d8cec45e37aadd349a24a3e4febdf248940e7d01553fe"
+    },
+    {
+      "source": "app-data.js",
+      "sha256": "8c6092870929b4945b4333b2ff3827ee966dbcfeebb7aff3e73e711f09f20970"
+    },
+    {
+      "source": "search-tags.js",
+      "sha256": "5c913e5f6bf948f66171f88aa9b3acbbef408ea5f3ee029754edf856af5465eb"
+    },
+    {
+      "source": "search-tags.css",
+      "sha256": "48279e01398a31f15e5cef8777ba27d873072940f36d16d09fe03d87877a725a"
+    },
+    {
+      "source": "search-improvements.js",
+      "sha256": "73462603cec72d1a7711e0d95b8b40408b7d3ca7ee5e3cfdb614d74fb400aaa7"
+    },
+    {
+      "source": "wall-scroll.js",
+      "sha256": "96ae05c7965a85d704ea9616022011d88a77461c68154274a3e795799404a214"
+    },
+    {
+      "source": "wall.css",
+      "sha256": "9bd20ffea149b08ec6254e0a455aa2d382ede8989d1f419b1d0bc8a7b1ed872b"
+    },
+    {
+      "source": "quiet.css",
+      "sha256": "88fa0ce0b523e3829d806ed326db361c92f7760c00d35e8f8ef3a786c90ac53c"
+    },
+    {
+      "source": "pinless-look.css",
+      "sha256": "e78664e2ca09a0932bcc143b5f5026740c9961e8b73794755c45be36b570ef82"
+    },
+    {
+      "source": "sandbox-state.js",
+      "sha256": "e3863f2167cff3b340fa2a4dd77bf416649c6752b53dea3322aa3a30574faf59"
+    },
+    {
+      "source": "pinless-look.js",
+      "sha256": "e2d7c567b3fdf066b471816fd215b2026b1fff314d82eef07ed4a12845ebec2e"
+    },
+    {
+      "source": "interest-bar.css",
+      "sha256": "d5ca6a5edd5d0e4cc02192eddf96f37bb3c2e3660db7782cd2cecd84e37ef627"
+    },
+    {
+      "source": "interest-bar.js",
+      "sha256": "6f3992ea04e0b062badbce73bead1ddc8a89ba2c7885168c4e0c0b9a791cbfbb"
+    },
+    {
+      "source": "subscription-import.js",
+      "sha256": "ea97ed23b07818767ac1b3ed223144cd8fc5ac51f74e10a8703d0865e58a87d7"
+    },
+    {
+      "source": "pinless-refresh.js",
+      "sha256": "c2b423371f2dc66591405c08b356de24f5a59e32f6d60ead44770685e7977e98"
+    },
+    {
+      "source": "warning.png",
+      "sha256": "325b7d24ce70ecbd0f1c1ee4d449f7618265a490d5078ae54b82e7569fa730ec"
+    },
+    {
+      "source": "notifications-disabled.js",
+      "sha256": "859859288234088f9ff378da77c269d3a30ad93275270f729775d1f082034b4c"
+    },
+    {
+      "source": "random-feed.js",
+      "sha256": "8156eaee6ca381dd344fb68d7eb9de66523792998a6bef5180c5787e21572d20"
+    },
+    {
+      "source": "star.html",
+      "sha256": "fe3bb50a3c249be459913bc9704aa2e3e106a6611823039b07e22c1ce8abb7ba"
+    },
+    {
+      "source": "sandbox-feed.js",
+      "sha256": "f855f2a944f4c732d8264488a306aa19492f051f207179b3d0bdcac23158ee5b"
+    },
+    {
+      "source": "site-prefs.js",
+      "sha256": "ec0e5f123ebb86f3c6c6c687ae92b55460e2738f01e676e0238b2f7d9eaf5591"
+    },
+    {
+      "source": "menu-page.js",
+      "sha256": "66242f7ea3ac49b637bd48a6cd4b97b0726411e0c1bd722a24e9de3ac2a9f2e4"
+    },
+    {
+      "source": "menu-page.css",
+      "sha256": "3a1ca0649dd02b0bd48ba47215fff3c1835122e8d2462bbd9c4f8696bf337f98"
+    },
+    {
+      "source": "player-controls.js",
+      "sha256": "77eae4daa9fe6cc1d1919abb00a72c7426005f1c895dacef1ef551f3e371cade"
+    },
+    {
+      "source": "player-controls.css",
+      "sha256": "d432c8599e25f6d963fa3f734cbf73e07df7931fcca1a3fee18874e8f02cd7c8"
+    },
+    {
+      "source": "hotkeys-guide.js",
+      "sha256": "a1aa2b7a0da2f3a1c628d2073ce49d9d12af03885f042f7ee90f2c6a936e9d04"
+    },
+    {
+      "source": "hotkeys-guide.css",
+      "sha256": "49006f914b8b8a61f205486939e00215714f44478d61ad672737a61f40a0377d"
+    },
+    {
+      "source": "hidden-page.js",
+      "sha256": "a803644ed288050777d3c790b764060c1b6d716873d584da8855049efc1b7ff0"
+    },
+    {
+      "source": "hidden-page.css",
+      "sha256": "6a4778ca2bf9677895ecb13ad0aac43e260d398f3fa239cf784ee509b3232cce"
+    },
+    {
+      "source": "branding.js",
+      "sha256": "8d8120eacc03400bad1ccd39d3dd43367d2a3df599f80c018fecb4ee0dd77dd6"
+    },
+    {
+      "source": "youtube-connection.js",
+      "sha256": "68c2e1df8c0a74937c4fd5567e4566e7f63587233d1e03c562131a1419c17f85"
+    },
+    {
+      "source": "youtube-connection.css",
+      "sha256": "4be2c2c0047518f8e2707fce31114c73a9702ea33c080469e1168a9087d6bf2c"
+    },
+    {
+      "source": "youtube-session-help.png",
+      "sha256": "27ee60da4d6ce6f31234adfc8c039d4f016f6f178cce61b3312a911b6ad8afe6"
+    },
+    {
+      "source": "watch-playlist.js",
+      "sha256": "7e7c6624d4eea0863398a3095ff49ebce3400f0a222e09408871db3350759ea5"
+    },
+    {
+      "source": "watch-playlist.css",
+      "sha256": "e2cc70716f86e8a030309caa178c47f528b20bd023cf9ca3a131bf9af6b6dcf8"
+    }
+  ]
+}

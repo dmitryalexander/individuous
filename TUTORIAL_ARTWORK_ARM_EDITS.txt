@@ -1,0 +1,11 @@
+October 19, 2026 — arm pose edits
+Method: built-in imagegen; transparent_background=true.
+Edit targets: ui/tutorial-restore-v3.png and ui/tutorial-following-v3.png.
+
+Final asset: ui/tutorial-restore-v4.png
+Prompt:
+Edit this exact character image with only the specified change to his arms and hands. Preserve his exact head size, face, expression, glasses, hair, sketchy hand-drawn linework, muted colors, dotted gray shirt, textured jeans, legs, bare feet, body proportions, image framing and transparent alpha background. Do not redesign the character. No background, floor, shadow, halo, glow or extra objects. Fold both arms naturally across his chest, relaxed crossed forearms. Keep his mildly puzzled expression, sideways glance and existing small amber question mark beside his head unchanged. Both arms must visibly be crossed, no arm hanging at the side.
+
+Final asset: ui/tutorial-following-v4.png
+Prompt:
+Edit this exact character image with only the specified change to his arms and hands. Preserve his exact head size, face, expression, glasses, hair, sketchy hand-drawn linework, muted colors, dotted gray shirt, textured jeans, legs, bare feet, body proportions, image framing and transparent alpha background. Do not redesign the character. No background, floor, shadow, halo, glow or extra objects. Put BOTH hands inside the front pockets of his blue jeans. Both forearms angle comfortably down into the pockets, wrists disappear into the pocket openings. Keep the casual standing stance and small smile unchanged. Neither hand hangs loose or is visible outside a pocket.

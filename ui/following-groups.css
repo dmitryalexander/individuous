@@ -1,0 +1,23 @@
+.pt-following-controls{display:flex;align-items:center;gap:7px;flex:none}
+.pt-active-following-group{display:inline-flex;align-items:center;max-width:150px;height:28px;box-sizing:border-box;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border:1px solid #41413b;border-radius:8px;padding:0 10px;color:#aaa;cursor:pointer;font:500 12px/26px system-ui}
+.pt-active-following-group.pt-playlist-here{background:#e6ad45;color:#171717;border-color:#e6ad45}
+.pt-following-controls .pt-brand{flex:none;margin:0!important}
+.pt-following-manager{display:flex;align-items:center;flex-wrap:wrap;gap:14px;padding:20px 24px;color:#bcbcb3}
+.pt-following-manager span{font-size:12px;color:#999}
+.pt-following-manager kbd{display:inline-grid;place-items:center;min-width:22px;height:23px;border:1px solid #b58a39;border-bottom-width:2px;border-radius:3px;background:#241f15;color:#e6ad45;font:600 12px system-ui;margin:0 3px}
+.pt-following-manager button,.pt-creator-groups{border:1px solid #605238;border-radius:5px;background:#252117;color:#e6ad45;padding:7px 11px;cursor:pointer;font-size:12px}
+.pt-creator-groups{position:relative;z-index:2;margin:8px}
+.pt-subscription[hidden]{display:none!important}
+.pt-group-remove-armed{outline:2px solid #cd6969!important;background:#43282c!important}
+.pt-following-message{color:#e6ad45;padding:10px 24px;font-size:13px}
+.pt-following-editor{box-sizing:border-box;width:min(600px,calc(100vw - 32px));max-height:85vh;padding:25px;border:1px solid #6f6246;border-radius:12px;background:#1c1d1a;color:#ddd}
+.pt-following-editor::backdrop{background:#000a}
+.pt-following-editor h2{font-size:21px;color:#eee;margin:0 0 12px}
+.pt-following-editor p{line-height:1.6;font-size:13px;color:#b9b9ad}
+.pt-following-options{display:grid;gap:3px;max-height:44vh;overflow:auto;margin:16px 0}
+.pt-following-options label{display:flex;align-items:center;gap:12px;padding:10px;background:#252621;cursor:pointer}
+.pt-following-options input{accent-color:#e6ad45;min-width:18px;height:18px}
+.pt-following-actions{display:flex;justify-content:flex-end;gap:10px}
+.pt-following-actions button{background:#292316;color:#e6ad45;border:1px solid #9b7b3c;border-radius:6px;padding:8px 18px;cursor:pointer}
+.pt-following-editor :focus-visible,.pt-active-following-group:focus-visible{outline:2px solid #e6ad45;outline-offset:3px}
+@media(max-width:850px){.pt-active-following-group{max-width:85px;padding:7px}.pt-following-controls{gap:4px}}

@@ -1,0 +1,7 @@
+{
+  "name": "individuous-youtube-account",
+  "private": true,
+  "type": "module",
+  "scripts": {"test": "node --test test.mjs"},
+  "dependencies": {"youtubei.js": "18.1.0"}
+}

@@ -70,15 +70,15 @@ end
 HOST_URL           = make_host_url(Kemal.config)
 MAX_ITEMS_PER_PAGE = 1500
 
-CURRENT_BRANCH  = {{ "#{`git branch | sed -n '/* /s///p'`.strip}" }}
-CURRENT_COMMIT  = {{ "#{`git rev-list HEAD --max-count=1 --abbrev-commit`.strip}" }}
-CURRENT_VERSION = {{ "#{`git log -1 --format=%ci | awk '{print $1}' | sed s/-/./g`.strip}" }}
-CURRENT_TAG     = {{ "#{`git tag --points-at HEAD`.strip}" }}
+CURRENT_BRANCH  = {{ env("INDIVIDUOUS_BUILD_BRANCH") || "individuous" }}
+CURRENT_COMMIT  = {{ env("INDIVIDUOUS_BUILD_COMMIT") || "48c6110+individuous" }}
+CURRENT_VERSION = {{ env("INDIVIDUOUS_BUILD_DATE") || "2026.10.20" }}
+CURRENT_TAG     = {{ env("INDIVIDUOUS_BUILD_TAG") || "" }}
 
 # This is used to determine the `?v=` on the end of file URLs (for cache busting). We
 # only need to expire modified assets, so we can use this to find the last commit that changes
 # any assets
-ASSET_COMMIT = {{ "#{`git rev-list HEAD --max-count=1 --abbrev-commit -- assets`.strip}" }}
+ASSET_COMMIT = {{ env("INDIVIDUOUS_ASSET_VERSION") || "release-20261020" }}
 
 SOFTWARE = {
   "name"    => "invidious",

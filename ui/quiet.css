@@ -1,0 +1,62 @@
+/* Shared browsing shell. Scoped rules leave settings and post content intact. */
+:root{--quiet-bg:#121212;--quiet-panel:#222;--quiet-muted:#a9a9a9;--quiet-gap:4px;color-scheme:dark}
+body,input,button,select,textarea,.continuous-status{font-family:system-ui,-apple-system,"Segoe UI",sans-serif!important}
+body{background:var(--quiet-bg)!important}
+.quiet-header{display:flex!important;align-items:center!important;gap:16px!important;padding:12px 16px!important;margin:0 0 10px!important;position:relative!important;min-height:56px;box-sizing:border-box;width:100%;z-index:20;background:var(--quiet-bg)!important;flex-wrap:wrap}
+.quiet-brand{font-size:22px!important;font-weight:700;line-height:1.2;text-decoration:none;color:#eee!important;white-space:nowrap}
+.quiet-search{display:flex!important;align-items:center;position:relative;flex:1;max-width:600px;min-width:140px;margin:0!important}
+.quiet-search input{width:100%!important;min-width:0;margin:0!important;padding:11px 48px 11px 16px!important;border:0!important;border-radius:24px!important;background:#222!important;color:#eee!important;font-size:14px!important;box-sizing:border-box}
+.quiet-search button{position:absolute;right:5px;top:4px;bottom:4px;width:36px;border:0;background:transparent!important;color:#bbb;border-radius:50%;cursor:pointer;padding:0!important}
+.quiet-nav{display:flex;align-items:center;gap:16px;margin-left:auto;white-space:nowrap;font-size:13px}
+.quiet-nav a{color:#bbb!important;text-decoration:none}
+.quiet-menu{position:relative;font-size:13px}
+.quiet-menu>summary{cursor:pointer;list-style:none;padding:10px 12px;border-radius:20px;background:#222;color:#ddd}
+.quiet-menu>summary::-webkit-details-marker{display:none}
+.quiet-menu-panel{position:absolute;right:0;top:calc(100% + 8px);min-width:190px;max-width:calc(100vw - 32px);padding:8px;background:#222;border:1px solid #3a3a3a;border-radius:12px;box-shadow:0 10px 30px #0008;z-index:50}
+.quiet-menu-panel a{display:block!important;padding:10px!important;font-size:13px!important;text-transform:none!important;white-space:normal;color:#ddd!important;text-decoration:none}
+.quiet-menu-panel a:hover{background:#303030;border-radius:6px}
+.quiet-disclosure{font-size:13px;color:#aaa;margin:8px 0;box-sizing:border-box}
+.quiet-disclosure>summary{cursor:pointer;padding:8px 0;color:#bbb;width:fit-content}
+.quiet-disclosure[open]>summary{color:#eee}
+.quiet-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 8px!important;font-size:12px;color:#aaa}
+.quiet-toolbar a{font-size:12px;color:#aaa!important}
+.quiet-toolbar h1{font-size:13px!important;font-weight:400!important;margin:0!important;color:#aaa}
+.quiet-header :focus-visible,.quiet-disclosure>summary:focus-visible,.quiet-media :focus-visible{outline:2px solid #608faf;outline-offset:3px}
+.kg-following-panel,.pb-following-panel{background:transparent!important;border:0!important;padding:0!important;margin:0!important}
+.kg-following-panel .kg-panel-head,.pb-following-panel .pb-panel-head{display:none}
+.kg-feed-layout{gap:0!important}.pb-feed-head,.kg-feed-head{margin:0 0 8px!important}
+.quiet-feed-accounts{margin:0 8px 4px!important}
+.quiet-feed-accounts .kg-chips,.quiet-feed-accounts .pb-chips{padding:0!important}
+.quiet-feed-accounts .kg-chip,.quiet-feed-accounts .pb-chip{background:#1c1c1c!important}
+.wall-view-options{margin:0 0 8px!important;gap:4px!important}
+.wall-view-options button{font:12px system-ui!important;padding:7px 12px!important;border-radius:18px!important}
+.continuous-status button{background:#292929!important;font-weight:500!important}
+.continuous-status{font-size:12px!important;padding:18px 8px!important}
+.quiet-profile{max-width:780px!important;margin:0 auto 12px!important;padding:12px!important;box-shadow:none!important;background:transparent!important}
+.quiet-profile .profile-picture{width:56px!important;height:56px!important;min-width:56px!important}
+.quiet-profile .profile-picture img{width:56px!important;height:56px!important;border-radius:50%!important}
+.quiet-profile .usernames h3{font-size:18px;margin:0}.quiet-profile .usernames p{margin:4px 0;color:#aaa;font-size:13px}
+.quiet-profile .quiet-disclosure{grid-column:1/-1;width:100%;flex-basis:100%}
+.quiet-profile .profile-stats ul{margin:8px 0;padding:0}.quiet-profile .user-bio{margin:0!important}
+.selector-group,.kg-follow-actions{margin:8px auto!important;padding:0 8px!important}.kg-follow-actions button{padding:7px 14px!important}
+body.tumblr-wall #blog-header{max-width:780px;margin:0 auto 10px!important}
+.quiet-blog #banner{display:none!important}.quiet-blog>.avatar,.quiet-blog>a>.avatar{width:56px!important;height:56px!important;position:static!important;margin:0!important}
+.quiet-blog{display:flex!important;gap:16px!important;padding:12px!important;align-items:flex-start!important;background:transparent!important;box-sizing:border-box}
+.quiet-blog .blog-header-textual-content{padding:0!important;margin:0!important;flex:1;text-align:left!important}
+.quiet-blog #blog-title{font-size:18px!important;margin:0 0 4px!important}.quiet-blog .blog-name{margin:4px 0!important;font-size:13px}
+body.tumblr-wall .contents{gap:0!important}
+body.tumblr-wall .left-column:empty{display:none}
+/* Restore readable context in All posts; the original wall hides every header/footer. */
+body.tumblr-wall .media-wall:not(.media-only) .post-header,body.tumblr-wall .media-wall:not(.media-only) .post-footer{display:flex!important}
+body.tumblr-wall .media-wall:not(.media-only) .post-tags{display:flex!important}
+body.tumblr-wall .media-wall:not(.media-only) .post{background:#191919!important;padding:8px 0!important}
+/* Touch and keyboard controls use non-overlapping rows, even on short media. */
+.mw-tile{--quiet-zone:36px}
+@media(pointer:coarse){.mw-tile{--quiet-zone:44px}}
+.mw-tile>.mw-download{height:var(--quiet-zone)!important}
+.mw-tile>.mw-post,.mw-image .image-container>a.tumblr-lens-action,.mw-solo>a.tumblr-lens-action{top:var(--quiet-zone)!important;height:var(--quiet-zone)!important}
+.mw-tile>.mw-play{top:calc(2 * var(--quiet-zone))!important;height:calc(100% - 2 * var(--quiet-zone))!important}
+.mw-external>.mw-post{top:0!important}
+.mw-tile.quiet-short{padding-top:calc(2 * var(--quiet-zone));background:#242522}
+.mw-tile.quiet-short>.mw-play{top:calc(2 * var(--quiet-zone))!important}
+@media(max-width:600px){.quiet-header{gap:10px!important;padding:10px 8px!important}.quiet-brand{font-size:19px!important}.quiet-search{order:3;flex-basis:100%;max-width:none}.quiet-nav{gap:12px}.quiet-header .quiet-menu-panel{right:0}}

@@ -1,0 +1,20 @@
+name: Release checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --test tests/*.test.cjs
+      - run: docker build -t individuous-account-test youtube-account
+      - run: docker run --rm --network none individuous-account-test npm test
+      - run: docker build -t individuous-data-test appdata
+      - run: docker run --rm --network none -v "$PWD:/repo:ro" -w /repo individuous-data-test python -m unittest discover -s tests -p 'test_*.py'
+      - run: docker build -t individuous:test .

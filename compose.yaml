@@ -1,0 +1,120 @@
+name: ${COMPOSE_PROJECT_NAME:-individuous}
+services:
+  gateway:
+    image: nginx:1.28-alpine@sha256:a8b39bd9cf0f83869a2162827a0caf6137ddf759d50a171451b335cecc87d236
+    ports: ["127.0.0.1:${INDIVIDUOUS_PORT:-3012}:80"]
+    volumes: ["${INDIVIDUOUS_SOURCE:-.}/docker/gateway.conf:/etc/nginx/templates/default.conf.template:ro"]
+    environment:
+      PT_SID: ${AUTO_SESSION_ID:?Run setup first}
+      NGINX_ENVSUBST_FILTER: "^PT_"
+    depends_on:
+      invidious: {condition: service_started, restart: true}
+      appdata: {condition: service_started, restart: true}
+      youtube-account: {condition: service_started, restart: true}
+    restart: unless-stopped
+  appdata:
+    build: ${INDIVIDUOUS_SOURCE:-.}/appdata
+    environment:
+      APP_ORIGINS: "http://localhost:${INDIVIDUOUS_PORT:-3012},http://127.0.0.1:${INDIVIDUOUS_PORT:-3012}"
+      DB_PASSWORD: ${DB_PASSWORD:?Run setup first}
+      AUTO_SESSION_ID: ${AUTO_SESSION_ID:?Run setup first}
+    volumes: [appdata:/data]
+    read_only: true
+    tmpfs: ["/tmp:size=64m,mode=1777"]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+  youtube-account:
+    build: ${INDIVIDUOUS_SOURCE:-.}/youtube-account
+    volumes: [youtubeaccount:/data]
+    read_only: true
+    tmpfs: ["/tmp:size=64m,mode=1777"]
+    init: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+  bootstrap:
+    image: postgres:14@sha256:c2427de38f998489d36de7ca3553db2134872c400f2b08be4b824e5c50e4d619
+    entrypoint: ["/bin/sh", "/bootstrap.sh"]
+    environment:
+      PGPASSWORD: ${DB_PASSWORD:?Run setup first}
+      PT_SID: ${AUTO_SESSION_ID:?Run setup first}
+    volumes:
+      - ${INDIVIDUOUS_SOURCE:-.}/docker/bootstrap.sh:/bootstrap.sh:ro
+      - ${INDIVIDUOUS_SOURCE:-.}/docker/bootstrap.sql:/bootstrap.sql:ro
+    depends_on:
+      invidious-db: {condition: service_healthy}
+    restart: "no"
+  invidious:
+    image: ${COMPOSE_PROJECT_NAME:-individuous}:local
+    build: ${INDIVIDUOUS_SOURCE:-.}
+    environment:
+      INVIDIOUS_CONFIG: |
+        db:
+          dbname: invidious
+          user: kemal
+          password: ${DB_PASSWORD:?Run setup first}
+          host: invidious-db
+          port: 5432
+        check_tables: true
+        invidious_companion:
+          - private_url: "http://companion:8282/companion"
+        invidious_companion_key: "${COMPANION_KEY:?Run setup first}"
+        hmac_key: "${HMAC_KEY:?Run setup first}"
+        domain: localhost
+        external_port: ${INDIVIDUOUS_PORT:-3012}
+        https_only: false
+        registration_enabled: false
+        login_enabled: true
+        captcha_enabled: false
+        statistics_enabled: false
+        enable_user_notifications: false
+        banner: '<script src="/js/pinless-refresh.js?v=release2"></script>'
+        default_user_preferences:
+          dark_mode: "dark"
+          player_style: "youtube"
+          default_home: "Subscriptions"
+          local: true
+          autoplay: false
+    depends_on:
+      bootstrap: {condition: service_completed_successfully}
+      companion: {condition: service_started}
+    restart: unless-stopped
+  companion:
+    image: quay.io/invidious/invidious-companion@sha256:f15bc688aedd4bbb76cc636c7cc0cfff9b2b9f0734a4b831efbda7253b180525
+    environment:
+      SERVER_SECRET_KEY: ${COMPANION_KEY:?Run setup first}
+    volumes: [companioncache:/var/tmp/youtubei.js:rw]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+  invidious-db:
+    image: postgres:14@sha256:c2427de38f998489d36de7ca3553db2134872c400f2b08be4b824e5c50e4d619
+    environment:
+      POSTGRES_DB: invidious
+      POSTGRES_USER: kemal
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Run setup first}
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+      - ${INDIVIDUOUS_SOURCE:-.}/config/sql:/config/sql:ro
+      - ${INDIVIDUOUS_SOURCE:-.}/docker/init-invidious-db.sh:/docker-entrypoint-initdb.d/init-invidious-db.sh:ro
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 3s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+volumes:
+  postgresdata:
+    external: ${INDIVIDUOUS_EXTERNAL_VOLUMES:-false}
+    name: ${INDIVIDUOUS_DB_VOLUME:-${COMPOSE_PROJECT_NAME:-individuous}_postgresdata}
+  companioncache:
+    external: ${INDIVIDUOUS_EXTERNAL_VOLUMES:-false}
+    name: ${INDIVIDUOUS_CACHE_VOLUME:-${COMPOSE_PROJECT_NAME:-individuous}_companioncache}
+  appdata:
+    external: ${INDIVIDUOUS_EXTERNAL_VOLUMES:-false}
+    name: ${INDIVIDUOUS_DATA_VOLUME:-${COMPOSE_PROJECT_NAME:-individuous}_appdata}
+  youtubeaccount:
+    external: ${INDIVIDUOUS_EXTERNAL_VOLUMES:-false}
+    name: ${INDIVIDUOUS_SESSION_VOLUME:-${COMPOSE_PROJECT_NAME:-individuous}_youtubeaccount}

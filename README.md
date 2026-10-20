@@ -1,166 +1,192 @@
-<div align="center">
-  <img src="assets/invidious-colored-vector.svg" width="192" height="192" alt="Invidious logo">
-  <h1>Invidious</h1>
+# Individuous
 
-  <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">
-    <img alt="License: AGPLv3" src="https://shields.io/badge/License-AGPL%20v3-blue.svg">
-  </a>
-  <a href="https://github.com/iv-org/invidious/actions">
-    <img alt="Build Status" src="https://github.com/iv-org/invidious/workflows/Invidious%20CI/badge.svg">
-  </a>
-  <a href="https://github.com/iv-org/invidious/commits/master">
-    <img alt="GitHub commits" src="https://img.shields.io/github/commit-activity/y/iv-org/invidious?color=red&label=commits">
-  </a>
-  <a href="https://github.com/iv-org/invidious/issues">
-    <img alt="GitHub issues" src="https://img.shields.io/github/issues/iv-org/invidious?color=important">
-  </a>
-  <a href="https://github.com/iv-org/invidious/pulls">
-    <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/iv-org/invidious?color=blueviolet">
-  </a>
-  <a href="https://hosted.weblate.org/engage/invidious/">
-    <img alt="Translation Status" src="https://hosted.weblate.org/widgets/invidious/-/translations/svg-badge.svg">
-  </a>
+A local, single-user Invidious fork with a compact video wall, search groups,
+collections, creator feeds, hidden videos and hover playback.
 
-  <h3>An open source alternative front-end to YouTube</h3>
+This is the consolidated release source. Its default address is
+**http://localhost:3012/star.html**. Installed and development profiles use this
+same source with separate private configuration and data volumes.
 
-  <a href="https://invidious.io/">Website</a>
-  &nbsp;•&nbsp;
-  <a href="https://instances.invidious.io/">Instances list</a>
-  &nbsp;•&nbsp;
-  <a href="https://docs.invidious.io/faq/">FAQ</a>
-  &nbsp;•&nbsp;
-  <a href="https://docs.invidious.io/">Documentation</a>
-  &nbsp;•&nbsp;
-  <a href="#contribute">Contribute</a>
-  &nbsp;•&nbsp;
-  <a href="https://invidious.io/donate/">Donate</a>
+## Start a fresh installation
 
-  <h5>Chat with us:</h5>
-  <a href="https://matrix.to/#/#invidious:matrix.org">
-    <img alt="Matrix" src="https://img.shields.io/matrix/invidious:matrix.org?label=Matrix&color=darkgreen">
-  </a>
-  <a href="https://web.libera.chat/?channel=#invidious">
-    <img alt="Libera.chat (IRC)" src="https://img.shields.io/badge/IRC%20%28Libera.chat%29-%23invidious-darkgreen">
-  </a>
-  <br>
-  <a rel="me" href="https://social.tchncs.de/@invidious">
-  <img alt="Fediverse: @invidious@social.tchncs.de" src="https://img.shields.io/badge/Fediverse-%40invidious%40social.tchncs.de-darkgreen">
-  </a>
-  <br>
-  <a href="https://invidious.io/contact/">
-  <img alt="E-mail" src="https://img.shields.io/badge/E%2d%2dmail-darkgreen">
-  </a>
-</div>
+Install Docker Desktop with Linux containers. On Windows, run **Start.cmd**.
+It generates fresh random configuration with `Setup.ps1`, then builds and starts
+the project. The first source build compiles Invidious and OpenSSL and can take
+several minutes. Subsequent interface builds reuse those layers.
 
+From PowerShell:
 
-## Screenshots
+```powershell
+./Setup.ps1
+docker compose up -d --build
+```
 
-| Player                              | Preferences                         | Subscriptions                         |
-|-------------------------------------|-------------------------------------|---------------------------------------|
-| ![](screenshots/01_player.png)      | ![](screenshots/02_preferences.png) | ![](screenshots/03_subscriptions.png) |
-| ![](screenshots/04_description.png) | ![](screenshots/05_preferences.png) | ![](screenshots/06_subscriptions.png) |
+One local account is created automatically in the new database. No YouTube login
+is needed for local collections, search groups or creator follows. New accounts
+start without personal follows, search terms, history or imported sessions.
 
+Empty Playlists, Search Groups, History, Hidden videos, Following,
+Search terms, personal YouTube feed and zero-result searches show contextual
+first steps with distinct transparent character poses and amber framed hotkeys.
+The creator-group tutorial appears only on the empty Following manager; its video
+feed shows loading/empty status and keeps the tutorial on the manager page.
+Menu has no character; its inline shortcuts use the same amber caps and explain
+Ctrl-click on the main video area opens YouTube. Guidance disappears when content
+appears. Artwork and prompts are documented in [TUTORIAL_ARTWORK.txt](TUTORIAL_ARTWORK.txt)
+and [TUTORIAL_ARTWORK_ADDITIONAL.txt](TUTORIAL_ARTWORK_ADDITIONAL.txt).
 
-## Features
+The default Compose project is `individuous`. For an independent development
+copy, set `COMPOSE_PROJECT_NAME=individuous-preview` and `INDIVIDUOUS_PORT=3013`
+in its `.env`; its images, containers and volumes stay separate. Keep a consistent
+hostname and port for browser storage. Existing installations can specify their
+volume names with the `INDIVIDUOUS_*_VOLUME` overrides documented in RELEASE_NOTES.md.
 
-**User features**
-- Lightweight
-- No ads
-- No tracking
-- No JavaScript required
-- Light/Dark themes
-- Customizable homepage
-- Subscriptions independent from Google
-- Notifications for all subscribed channels
-- Audio-only mode (with background play on mobile)
-- Support for Reddit comments
-- [Available in many languages](locales/), thanks to [our translators](#contribute)
+```powershell
+docker compose logs --tail=80
+docker compose stop
+docker compose start
+```
 
-**Data import/export**
-- Import subscriptions from YouTube, NewPipe and FreeTube
-- Import watch history from YouTube and NewPipe
-- Export subscriptions to NewPipe and FreeTube
-- Import/Export Invidious user data
+Use `up -d --build` again after source changes. Stop preserves data. Removing
+Compose volumes with `down -v` deletes the preview's data.
 
-**Technical features**
-- Embedded video support
-- [Developer API](https://docs.invidious.io/api/)
-- Does not use official YouTube APIs
-- No Contributor License Agreement (CLA)
+## Protected combined views
 
+Favorites and Search each offer **All Groups**. Favorites combines saved videos
+from every playlist, showing each video once. Search combines all groups' terms,
+counting shared terms once. Both options are computed views and cannot be renamed
+or deleted. Choose a named playlist to save, move, remove or shuffle its videos;
+choose a named search group to add or edit terms. The combined contents are rebuilt
+from their source groups and are never saved as duplicate collections.
 
-## Quick start
+Play and Following offer **All Creators**, which includes everyone you follow,
+even creators assigned to no custom group. The previous All following ID is kept;
+its display name migrates without changing follows or group membership.
 
-**Using Invidious:**
+## Following groups
 
-- [Select a public instance from the list](https://instances.invidious.io) and start watching videos right now!
+The play button sits at the top right beside Following. Its group-name rectangle
+chooses whose videos appear. **All Creators** always contains everyone you follow;
+custom groups contain the creators you choose, and creators can belong to several.
+The playlist selected on the left still controls where you save videos.
 
-**Hosting Invidious:**
+- **A** over the group name or in its open list: create a following group.
+- **R** on a custom group in the list: rename; Enter saves, Esc cancels.
+- **X twice** on a custom group in the list: delete the group, preserving follows.
+- **I** over the group name: choose its creators with checkboxes and Save.
+- **G** over a creator on Following (or their Groups button): edit all their memberships.
+- **X twice** over a creator in a named group: remove that membership only.
+  In All Creators, the existing two-press unfollow behavior remains.
 
-- [Follow the installation instructions](https://docs.invidious.io/installation/)
+Arrow keys and Enter select groups; Escape closes/cancels. In membership dialogs,
+Tab moves and Space toggles a checkbox. I over the person icon still edits the
+whole account follow list. All Creators cannot be renamed or deleted.
 
+Groups are metadata in `pt-following-groups-v1`, synced to the isolated app-data
+service alongside playlists. They do not create YouTube subscriptions. Feed URLs
+include the group ID; restored walls also check group membership before reusing
+cached videos. Missing groups and unreadable group data produce an error without
+resetting the stored data. Older installations need no follow migration.
 
-## Documentation
+## Downloads and transcripts
 
-The full documentation can be accessed online at https://docs.invidious.io/
+On a video tile or the main player:
 
-The documentation's source code is available in this repository:
-https://github.com/iv-org/documentation
+- **Click the red strip:** copy the YouTube video URL and open
+  [YTUltra](https://www.ytultra.com/en/youtube-video-downloader/). Paste into its
+  input. If clipboard access is blocked, Individuous shows the selectable URL.
+- **Ctrl-click the red strip** (Command-click on Mac): open
+  [YouTube Transcript](https://www.youtube-transcript.io/) with that video's ID.
 
-### Extensions
+Menu → Downloads & transcripts lets you change these destinations. URL templates
+may contain `{id}` for the video ID or `{url}` for the encoded full YouTube URL.
+A plain downloader URL uses the clipboard handoff. YTUltra did not prefill its
+input in the tested `?url=` navigation; the app does not promise automatic filling.
 
-We highly recommend the use of [Privacy Redirect](https://github.com/SimonBrazell/privacy-redirect#get),
-a browser extension that automatically redirects YouTube URLs to any Invidious instance and replaces
-embedded YouTube videos on other websites with Invidious.
+These actions open external sites. Individuous does not download media, run
+FFmpeg, extract transcripts or send your local YouTube session to those tools.
+Playback and hover previews still stream media through Invidious and its companion.
+External provider availability, sign-in requirements and results can change.
 
-The documentation contains a list of browser extensions that we recommended to use along with Invidious.
+## Optional YouTube connection
 
-You can read more here: https://docs.invidious.io/applications/
+Menu → YouTube connection can import your own YouTube session for the personal
+home feed. A fresh preview has no saved connection. Connecting is optional and
+separate from the automatically created local account. Treat the cookie as a
+credential; enter it only into your own local app. It is saved in the private
+`individuous_youtubeaccount` volume, excluded from app-data exports.
+See [the service notes](youtube-account/README.md).
 
+## Data and local hosting
 
-## Contribute
+Menu includes **Save hash / Load hash** and **Export info / Import info /
+Clear everything**. Save hash downloads a separate private credential file;
+ordinary info exports exclude that login. Loading a saved hash works offline,
+then the Menu checks authentication. A saved file cannot extend an expired session.
 
-### Code
+Info exports include collections, groups, follows, watch history, account
+preferences, native playlists, volume/crop settings and browser playback positions.
+Import replaces app information after confirmation and retains the current hash.
+Clear everything requires typing `CLEAR EVERYTHING`, removes app information,
+saved hash and automatic app backups, and returns to empty defaults. Downloaded
+media files remain. The automatic local sign-in account remains available.
 
-1.  Fork it ( https://github.com/iv-org/invidious/fork ).
-1.  Create your feature branch (`git checkout -b my-new-feature`).
-1.  Stage your files (`git add .`).
-1.  Commit your changes (`git commit -m 'Add some feature'`).
-1.  Push to the branch (`git push origin my-new-feature`).
-1.  Create a new pull request ( https://github.com/iv-org/invidious/compare ).
+Imports and resets reject stale writes, including native account actions.
+Collection conflicts pause saving and let you download your unsaved copy and
+choose the saved or local version. Menu → Recover saved data offers automatic
+copies if the store is damaged. Interrupted import/reset operations resume from
+durable intent before further reads or writes are accepted.
 
-### Translations
+The default volumes are `individuous_postgresdata` (account, follows and
+history), `individuous_appdata` (collections and search groups),
+`individuous_companioncache` and `individuous_youtubeaccount`.
+Back them up while the preview is stopped. Never publish `.env` or volume contents.
+The app-data service also keeps daily and first-sync backups.
 
-We use [Weblate](https://weblate.org) to manage Invidious translations.
+This is a local single-user app with automatic sign-in. Its port is bound to
+127.0.0.1; do not expose it publicly. To choose another local port, change
+`INDIVIDUOUS_PORT` in `.env` before starting. Do not use the installed app's port.
 
-You can suggest new translations and/or correction here: https://hosted.weblate.org/engage/invidious/.
+## Source and development
 
-Creating an account is not required, but recommended, especially if you want to contribute regularly.
-Weblate also allows you to log-in with major SSO providers like GitHub, GitLab, BitBucket, Google, ...
+The complete upstream source and Git history are retained at Invidious revision
+`48c6110a83fc788b4199daf737279b71950cc0db` (v2.20260804.1), the revision identified
+in the installed image's labels. The old installation's `UPSTREAM.txt` named a
+different revision; it was not used as the source baseline.
 
+For Git clones, first run `git submodule update --init mocks` to fetch pinned
+upstream test fixtures. Source archives include those fixtures.
 
-## Projects using Invidious
+`Dockerfile` compiles the local source using the upstream build, then integrates
+the custom assets in `ui/` in their required order. `app-data.js` hydrates saved
+data before interface scripts read it. `docker/Dockerfile` retains the upstream
+build for reference. The companion image is pinned to its inspected digest.
 
-A list of projects and extensions for or utilizing Invidious can be found in the documentation: https://docs.invidious.io/applications/
+`SOURCE_MANIFEST.json` records the original UI input hashes before preview changes.
+The `upstream` Git remote points to iv-org/invidious. The `origin` publishing
+remote is [dmitryalexander/individuous](https://github.com/dmitryalexander/individuous).
 
-## Liability
+```powershell
+node --test tests/*.test.cjs
+docker build -t individuous-data-test appdata
+docker run --rm --network none -v "${PWD}:/repo:ro" -w /repo individuous-data-test python -m unittest discover -s tests -p "test_*.py"
+powershell -NoProfile -ExecutionPolicy Bypass -File tests/setup.test.ps1
+docker compose run --rm --no-deps youtube-account npm test
+```
 
-We take no responsibility for the use of our tool, or external instances
-provided by third parties. We strongly recommend you abide by the valid
-official regulations in your country. Furthermore, we refuse liability
-for any inappropriate use of Invidious, such as illegal downloading.
-This tool is provided to you in the spirit of free, open software.
+See [release verification](RELEASE_NOTES.md) for current checks.
+[Preview verification](PREVIEW_STATUS.md) preserves the earlier baseline.
+The historical upstream README is [retained separately](README.upstream.md).
 
-You may view the LICENSE in which this software is provided to you [here](./LICENSE).
+## Credits
 
->   16. Limitation of Liability.
->
-> IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
-WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS
-THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY
-GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE
-USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF
-DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD
-PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),
-EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
-SUCH DAMAGES.
+Based on [Invidious](https://github.com/iv-org/invidious), under the
+[GNU AGPL v3 license](LICENSE). The optional account service uses YouTube.js 18.1.0
+(MIT); dependencies and integrity hashes are locked in its package lockfile.
+The custom interface includes adaptations from [Pinless](https://github.com/bunk-im/pinless)
+(AGPL v3). Preserve the upstream license and notices when redistributing.
+Individuous is not affiliated with YouTube or the external tool providers.
+
+Automatic daily copies keep the latest 14 days. First-sync copies keep at most
+20 files, 128 MiB total, and 30 days of history (always retaining the newest copy).
+These are recovery aids; use Export info and Save hash for your own backups.

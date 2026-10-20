@@ -1,0 +1,17 @@
+# Personal YouTube feed service
+
+This optional, local service connects a YouTube browser session to Individuous's personal home-feed wall. It uses pinned [YouTube.js 18.1.0](https://github.com/LuanRT/YouTube.js) (MIT), with a lockfile and the dependency's included notices. Cookie import follows its [authentication guide](https://ytjs.dev/guide/authentication).
+
+Open Individuous's **Menu → YouTube connection**, expand **How to connect your session**, and paste the complete YouTube **Cookie header value** into the masked field. One SAPISID hash alone is insufficient. Connect checks YouTube's account response before accepting and saving the value. Check connection repeats authentication; opening Menu automatically checks a saved connection. The actual account must be connected by the owner before personal recommendations can be verified live.
+
+**Your YouTube feed** is available from Menu and the chain-link icon in the toolbar. Refresh fetches a new home page; Load more fetches an opaque, bounded continuation. Shuffle loaded videos (or S) changes the loaded wall only. Existing A, double-X, preview and playback controls operate on local Individuous collections and hidden state. These actions do not send subscription, watch-history or “Not interested” updates to YouTube. Playback still uses the existing Invidious/companion services; importing this feed connection does not promise Premium/private playback or YouTube history synchronization.
+
+Connected means a fresh YouTube authentication check succeeded. GET session status verifies with YouTube, just like Check connection; a saved value alone never counts as connected. The separate `has_session` flag keeps Check, Replace, Save hash and Clear hash available when a saved session fails authentication.
+
+The connection is saved atomically as `/data/session.json` with mode 0600 in Docker volume `individuous-preview_youtubeaccount`. It is separate from database/app-data backups and never included in status responses, info exports or logs. The explicit Menu Save hash action downloads a separate private credential file through a protected same-origin POST; Load hash restores that file without claiming authentication until checked. Clear hash deletes only this saved connection; Clear everything also removes it. A failed replacement/check preserves the previous value. Keep this volume private and exclude it from public source/artifacts. This preview never mounts the installed app's volumes.
+
+The service has no published host port. The gateway exposes `/youtube-account/` on the existing localhost app origin. Mutations require an exact local Origin and JSON; personal-feed reads require same-origin fetch metadata or Origin. Imported credentials are restricted to YouTube's session/config/account-list/browse endpoints, with redirects refused. Library diagnostic logging is disabled to avoid dumping personal responses.
+
+Continuations are server-memory objects, bounded to 64 recent pages and 15 minutes. Refresh after restart/expiry. Feed shape and authentication depend on YouTube's undocumented API; parser or authentication failures are reported without substituting anonymous results as a personal feed.
+
+Tests: `docker compose -p individuous-preview run --rm --no-deps youtube-account npm test` uses synthetic accounts/HTTP and temporary files. It does not import an owner's session. Browser verification and nonpersonal screenshots live outside this source under `release-prep/probes/verify-individuous-youtube.cjs`.
