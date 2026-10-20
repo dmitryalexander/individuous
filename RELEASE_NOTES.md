@@ -59,3 +59,10 @@ main player attached and in place. S over a creator page shuffles its loaded vid
 cards. Header controls, typing fields and open dialogs retain their guards. A
 shuffle always changes the visible order when at least two cards are present.
 Three owner-supplied screenshots now show the feed, creator and watch views.
+
+Cache audit follow-up: Back/Forward restored pages recheck saved-data revisions and
+reset epochs while preserving pending edits.
+The build fingerprint includes all shipped assets. Refresh covers page-specific
+player scripts/styles and local artwork, supports unavailable session storage, and
+detects a newly deployed build after Back/Forward. Gateway revalidation does not
+trust file timestamps for CSS/JS; personalized HTML/JSON is no-store.

@@ -1,7 +1,7 @@
 # Release verification — October 20, 2026
 
 - Pinful: Go regression suite and JavaScript/template checks passed.
-- Individuous: 172 upstream Crystal examples, 36 custom JavaScript tests,
+- Individuous: 172 upstream Crystal examples, 42 custom JavaScript tests,
   eight synthetic session-service tests, five HTTP storage/restart/retention tests and
   PowerShell first-run/idempotence checks passed.
 - Portable integration checks passed: account/collection round trip, native Int64
@@ -35,3 +35,6 @@ were supplied by the owner and added unchanged to the README.
 
 Cache repair: seven regression checks cover mixed CSS/JS, matching assets, failed
 fetches, playback protection, reload throttling and standalone-page coverage.
+
+Cache audit: targeted mixed-asset, player/style/art refresh, unavailable-storage,
+Back/Forward saved-data/epoch and pending-edit preservation regressions passed.

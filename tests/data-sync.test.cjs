@@ -14,7 +14,7 @@ function fixture({local = {}, server = {items:{},epoch:''}, fetcher}={}) {
   const window={localStorage,sessionStorage,location:{reload(){reloads++;}}};
   vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../ui/app-data.js'),'utf8'),{
     window,Storage,XMLHttpRequest,addEventListener:(key,fn)=>{events[key]=fn;},setTimeout:fn=>(timers.push(fn),timers.length),clearTimeout(){},
-    fetch:async(url,init)=>{requests.push(init && JSON.parse(init.body));return fetcher ? fetcher(url,init) : {ok:true,status:200,json:async()=>server};}
+    fetch:async(url,init)=>{requests.push(init?.body ? JSON.parse(init.body) : null);return fetcher ? fetcher(url,init) : {ok:true,status:200,json:async()=>server};}
   });
   return {window,localStorage,sessionStorage,events,requests,timers,get reloads(){return reloads;}};
 }
@@ -77,4 +77,18 @@ test('offline edits retain their original revision across reloads',async()=>{
     server:{items:{'pt-video-lists-v1':'remote'},epoch:'',revisions:{'pt-video-lists-v1':'new'}}});
   await f.window.appData.flush();
   assert.equal(f.requests[0].base['pt-video-lists-v1'],'old');
+});
+
+
+test('Back/Forward restore rechecks reset epochs before reusing stale collections',async()=>{
+ const server={items:{},epoch:'old'},f=fixture({server});server.epoch='new';
+ f.events.pageshow({persisted:true});await new Promise(resolve=>setImmediate(resolve));assert.equal(f.reloads,1);
+});
+test('Back/Forward restore reloads changed server collections without pending edits',async()=>{
+ const server={items:{},epoch:'',revisions:{}},f=fixture({server});server.revisions={'pt-video-lists-v1':'new'};
+ f.events.pageshow({persisted:true});await new Promise(resolve=>setImmediate(resolve));assert.equal(f.reloads,1);
+});
+test('Back/Forward restore preserves unsaved edits for normal conflict resolution',async()=>{
+ const server={items:{},epoch:'',revisions:{}},f=fixture({server});f.localStorage.setItem('pt-video-lists-v1','my edit');server.revisions={'pt-video-lists-v1':'new'};
+ f.events.pageshow({persisted:true});await new Promise(resolve=>setImmediate(resolve));assert.equal(f.reloads,0);assert.equal(f.localStorage.getItem('pt-video-lists-v1'),'my edit');
 });
