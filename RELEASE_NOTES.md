@@ -47,3 +47,11 @@ are mocked on installed apps. No real reset/import is part of the upgrade.
 External Pinterest/YouTube availability and expired credentials remain outside
 this application's control. This was a targeted review of custom code and build
 configuration, not an audit of every upstream dependency.
+
+## Watch/creator shortcut follow-up
+
+S over the body of a watch page now shuffles related videos while keeping the
+main player attached and in place. S over a creator page shuffles its loaded video
+cards. Header controls, typing fields and open dialogs retain their guards. A
+shuffle always changes the visible order when at least two cards are present.
+Three owner-supplied screenshots now show the feed, creator and watch views.

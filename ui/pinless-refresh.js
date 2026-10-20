@@ -28,7 +28,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     // Runs after every other start-up script on the page.
     setTimeout(function () {
-      if (window.appDataControlsVersion !== 2 || window.pinlessControlsVersion !== 3 || window.individuousBrandVersion !== 1 || window.ptLoopPreferenceVersion !== 1 || window.ptYouTubeConnectionVersion !== 9 || window.ptPlaylistWallVersion !== 1 || window.ptPlaylistBannerVersion !== 1) refresh();
+      if (window.ptBodyShuffleVersion !== 1 || window.appDataControlsVersion !== 2 || window.pinlessControlsVersion !== 3 || window.individuousBrandVersion !== 1 || window.ptLoopPreferenceVersion !== 1 || window.ptYouTubeConnectionVersion !== 9 || window.ptPlaylistWallVersion !== 1 || window.ptPlaylistBannerVersion !== 1) refresh();
     }, 0);
   });
 })();

@@ -1,4 +1,4 @@
-/*! pinless-look-build:2026-10-15-menuboxes1 */
+/*! pinless-look-build:2026-10-20-bodyshuffle1 */
 /* Pinless look for Invidious (the YouTube app in MyApps).
    - Header like Pinless: brand + pill search with the red icon; S (search terms), F (Subscriptions)
      and M (Menu) circles on the right, like the other apps. Search filters are a funnel circle.
@@ -14,7 +14,8 @@
    Replaces the old "quiet" YouTube layer. Links and forms keep working if this script fails. */
 ;(() => {
   'use strict';
-  const BUILD = '2026-10-15-menuboxes1';
+  window.ptBodyShuffleVersion = 1;
+  const BUILD = '2026-10-20-bodyshuffle1';
   // The search group dropdown (interest-bar.js) reuses the playlist picker.
   window.ptMenuPicker = (label, opts) => playlistPicker(label, !!opts.here, opts);
   const $ = (selector, root) => (root || document).querySelector(selector);
@@ -1792,7 +1793,8 @@
   }
 
   function shuffleManagerWall() {
-    if (!['/subscription_manager', '/feed/history', '/search'].includes(location.pathname)) return;
+    const creatorPage = /^\/channel\/UC[\w-]{22}(?:\/|$)/.test(location.pathname);
+    if (!creatorPage && !['/subscription_manager', '/feed/history', '/search', '/watch'].includes(location.pathname)) return;
     let pointer = null;
     document.addEventListener('pointermove', event => {pointer = [event.clientX, event.clientY];}, {passive:true});
     document.documentElement.addEventListener('pointerleave', () => {pointer = null;});
@@ -1806,11 +1808,15 @@
       if (!walls.length) return;
       event.preventDefault(); event.stopImmediatePropagation();
       walls.forEach(wall => {
-        const cards = [...wall.children];
+        // Leave the selected player attached and anchored; only move surrounding cards.
+        const cards = [...wall.children].filter(card => !card.matches('.pt-watch-featured,.pt-playing-channel'));
+        if (cards.length < 2) return;
+        const previous = [...cards];
         for (let i = cards.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [cards[i], cards[j]] = [cards[j], cards[i]];
         }
+        if (cards.every((card, index) => card === previous[index])) cards.push(cards.shift());
         wall.append(...cards);
       });
       scheduleLayout();

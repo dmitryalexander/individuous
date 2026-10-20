@@ -1,7 +1,7 @@
 # Release verification — October 20, 2026
 
 - Pinful: Go regression suite and JavaScript/template checks passed.
-- Individuous: 172 upstream Crystal examples, 21 custom JavaScript tests,
+- Individuous: 172 upstream Crystal examples, 29 custom JavaScript tests,
   eight synthetic session-service tests, five HTTP storage/restart/retention tests and
   PowerShell first-run/idempotence checks passed.
 - Portable integration checks passed: account/collection round trip, native Int64
@@ -23,3 +23,12 @@
 These checks were completed before publication; published commits are recorded in Git history. External service availability and the
 validity of an owner's live Pinterest/YouTube credential are not guaranteed by
 synthetic tests. This is a targeted review of the custom code and release setup.
+
+## Watch/creator body shuffle follow-up
+
+Eight added regressions cover watch and creator routes, live appended cards, pinned
+main players, visible reshuffles and input/header/dialog/modifier guards. The real
+browser fixture reproduced the missing shortcut on the prior release and verified
+its fix on both page types. The watch video stayed attached and playing. The
+installed and development profiles use the same updated assets; screenshot files
+were supplied by the owner and added unchanged to the README.

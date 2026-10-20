@@ -7,6 +7,23 @@ This is the consolidated release source. Its default address is
 **http://localhost:3012/star.html**. Installed and development profiles use this
 same source with separate private configuration and data volumes.
 
+## Screenshots
+
+A compact wall for browsing videos from your creators:
+
+![Individuous video feed with a four-column wall and creator-group selector](screenshots/feed-wall.png)
+
+Creator pages keep content tabs, sorting and feed-order controls above the videos:
+
+![Creator page showing the banner, content tabs and video wall](screenshots/creator-page.png)
+
+The watch page keeps the main player beside a wall of related videos:
+
+![Watch page with the main player and related videos](screenshots/watch-page.png)
+
+Hover the page body and press **S** to shuffle the loaded videos on creator pages
+or the related videos on watch pages. The main player stays in place.
+
 ## Start a fresh installation
 
 Install Docker Desktop with Linux containers. On Windows, run **Start.cmd**.

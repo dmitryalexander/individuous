@@ -69,7 +69,7 @@ services:
         captcha_enabled: false
         statistics_enabled: false
         enable_user_notifications: false
-        banner: '<script src="/js/pinless-refresh.js?v=release2"></script>'
+        banner: '<script src="/js/pinless-refresh.js?v=shuffle1"></script>'
         default_user_preferences:
           dark_mode: "dark"
           player_style: "youtube"

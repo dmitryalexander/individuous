@@ -1,7 +1,7 @@
-/*! pinless-look-build:2026-10-15-menuboxes1 */
+/*! pinless-look-build:2026-10-20-bodyshuffle1 */
 /* Pinless look for Invidious (the YouTube app in MyApps). Works with pinless-look.js.
    Colours match Pinless and the Lens Wall extension: red #b96170 download, blue #608faf creator, gray #929292 open. */
-:root{--pinless-look-build:"2026-10-15-menuboxes1";--pt-accent:#e6ad45;--pt-bg:#121212;--pt-frame:#242522;--pt-card:#1e1e1e;--pt-red:#b96170;--pt-blue:#608faf;--pt-gray:#929292;--pt-watch-w:min(100%,1280px,calc(78vh * 16 / 9))}
+:root{--pinless-look-build:"2026-10-20-bodyshuffle1";--pt-accent:#e6ad45;--pt-bg:#121212;--pt-frame:#242522;--pt-card:#1e1e1e;--pt-red:#b96170;--pt-blue:#608faf;--pt-gray:#929292;--pt-watch-w:min(100%,1280px,calc(78vh * 16 / 9))}
 
 /* Page */
 body.pt-youtube{background:var(--pt-bg)!important;color:#eee!important}

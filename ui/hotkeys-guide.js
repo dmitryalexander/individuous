@@ -119,7 +119,7 @@
     youtubeShortcut.classList.add('pt-hotkeys-wide'); s.append(youtubeShortcut);
     s.append(row(
       card(['A'], 'Save or unsave', 'Adds the video to your active playlist. Press A again to take it out.'),
-      card(['S'], 'Shuffle', 'With the mouse over the videos: on your feed it draws a different batch, on a search it reshuffles the results loaded so far, on a playlist it shuffles and saves that order.'),
+      card(['S'], 'Shuffle', 'With the mouse over the videos: on your feed it draws a different batch, on a search or creator page it reshuffles the videos loaded so far, on a watch page it mixes the related videos while keeping the main player in place, and on a playlist it shuffles and saves that order.'),
       card(['Z'], 'Fullscreen', 'For a video you clicked to play in the tile. Press Z again to leave fullscreen.'),
       card(['+', '−'], 'Volume', 'Up or down by a tenth while a video plays in the tile or on its own page.')));
     s.append(el('h3', '', 'Hiding a video you don’t want'),
