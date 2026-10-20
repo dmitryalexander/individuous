@@ -211,7 +211,11 @@
   }
   function show(kind, empty, hideStatus = true) {
     const sourceKind = kind;
-    // Creator-group teaching belongs on the Following manager, not its video feed.
+    if (kind === 'following' && location.pathname === '/subscription_manager') {
+      const old = document.getElementById(ID); if (old?.dataset.kind === 'following') old.remove();
+      return;
+    }
+    // Creator-group teaching belongs in Menu, not the video feed.
     if (kind === 'subscriptions' && new URLSearchParams(location.search).get('pt_restore') !== '1') {
       const old = document.getElementById(ID);
       if (old && ['subscriptions','followingfeed'].includes(old.dataset.kind)) old.remove();

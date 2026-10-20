@@ -1,9 +1,9 @@
 /* Following-group metadata never changes the account's actual subscriptions. */
 ;((root) => {
   'use strict';
-  const KEY = 'pt-following-groups-v1', ALL = 'all';
+  const KEY = 'pt-following-groups-v1', ALL = 'all', FAVORITES = 'favorites';
   const channel = /^UC[\w-]{22}$/;
-  const defaults = () => ({activeId:ALL, lists:[{id:ALL,name:'All Creators',channels:[]}]});
+  const defaults = () => ({activeId:ALL, defaultId:FAVORITES, lists:[{id:ALL,name:'All Creators',channels:[]},{id:FAVORITES,name:'Favorites',channels:[]}]});
   function validate(data) {
     if (!data || !Array.isArray(data.lists) || !data.lists.length || typeof data.activeId !== 'string') throw Error('Could not read following groups. Your saved groups have been kept.');
     const ids = new Set(), names = new Set();
@@ -19,7 +19,7 @@
     if (raw === null) return defaults();
     const data = JSON.parse(raw), all = data?.lists?.find(group => group.id === ALL);
     if (all?.name === 'All following') all.name = 'All Creators';
-    return validate(data);
+    return ensureDefault(data);
   }
   const active = data => validate(data).lists.find(group => group.id === data.activeId);
   function filter(data, followed) {
@@ -33,7 +33,28 @@
     if (!group) throw Error('This following group no longer exists.');
     group.channels = [...new Set(channels)]; return validate(data);
   }
-  const api = {KEY,ALL,defaults,validate,read,active,filter,setMembers};
+  // Legacy groups gain Favorites without moving existing memberships or follows.
+  function ensureDefault(data) {
+    validate(data);
+    if (data.defaultId !== undefined && typeof data.defaultId !== 'string') throw Error('Could not read the default creator group.');
+    let group = data.lists.find(g => g.id !== ALL && g.id === data.defaultId);
+    if (!group && data.defaultId) group = data.lists.find(g => g.id !== ALL);
+    if (!group) group = data.lists.find(g => g.id !== ALL && g.name.trim().toLowerCase() === 'favorites');
+    if (!group) {
+      let id = FAVORITES, suffix = 2;
+      while (data.lists.some(g => g.id === id)) id = FAVORITES + '-' + suffix++;
+      group = {id,name:'Favorites',channels:[]}; data.lists.push(group);
+    }
+    data.defaultId = group.id; return data;
+  }
+  function addToActive(data, id) {
+    if (!channel.test(id)) throw Error('Invalid creator.');
+    ensureDefault(data);
+    const target = active(data).id === ALL ? data.defaultId : data.activeId;
+    const group = data.lists.find(g => g.id === target);
+    setMembers(data,target,[...group.channels,id]); return group;
+  }
+  const api = {KEY,ALL,FAVORITES,defaults,validate,read,active,filter,setMembers,ensureDefault,addToActive};
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.ptFollowingGroupModel = api;
 })(typeof window === 'undefined' ? globalThis : window);

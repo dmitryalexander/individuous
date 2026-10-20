@@ -72,3 +72,8 @@ Mouse actions use matching CLICK badges; explanatory text remains below.
 
 Tutorial refinement: title-case Click badges and centered rectangular frames
 for the combined input and uppercase heading.
+
+Creator manager: preserve avatar sizes and hover names, remove repeated Groups
+buttons and page tutorial/count text, add an editable Favorites default group,
+and use A on the creator wall to add membership (Favorites from All Creators).
+Existing groups/follows are preserved; amber feedback stays on the avatar.

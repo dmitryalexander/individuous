@@ -207,3 +207,12 @@ Individuous is not affiliated with YouTube or the external tool providers.
 Automatic daily copies keep the latest 14 days. First-sync copies keep at most
 20 files, 128 MiB total, and 30 days of history (always retaining the newest copy).
 These are recovery aids; use Export info and Save hash for your own backups.
+
+Creator management keeps the avatar wall and hover names. Favorites is the default
+named creator group. Over a creator on the manager, **A** adds to the selected named
+group, or to Favorites from All Creators; pressing A again keeps that membership.
+**G** edits all memberships, **I** over the group name edits that group's creators
+(Favorites from All Creators), and **X** twice removes from a named group or unfollows
+from All Creators. At least one named creator group is kept and can be renamed.
+The manager has no repeated Groups buttons or tutorial banner; instructions live
+in Menu. Existing follows and memberships are preserved when Favorites is added.

@@ -7,7 +7,10 @@
   const feed = location.pathname === '/feed/subscriptions' && !params.has('pt_page');
   let label, summary, dialog, pointer = null, armed = null, armTimer;
   const read = () => M.read(localStorage.getItem(M.KEY));
-  function save(data) { M.validate(data); localStorage.setItem(M.KEY, JSON.stringify(data)); }
+  function save(data) {
+    if (!data.lists.some(group => group.id !== M.ALL)) throw Error('Keep at least one named creator group. You can rename it instead.');
+    M.ensureDefault(data); localStorage.setItem(M.KEY, JSON.stringify(data));
+  }
   function scoped() {
     const data = read(), id = params.get('pt_following');
     if ((feed || manager) && id) {
@@ -24,6 +27,14 @@
       if (anchor) anchor.after(summary); else contents?.prepend(summary);
     }
     summary.textContent = message;
+  }
+  let liveStatus;
+  function announce(message) {
+    if (!liveStatus) {
+      liveStatus = document.createElement('span'); liveStatus.className = 'pt-creator-status';
+      liveStatus.setAttribute('role','status'); liveStatus.setAttribute('aria-live','polite'); document.body.append(liveStatus);
+    }
+    liveStatus.textContent = message;
   }
   function channels(doc) {
     return [...doc.querySelectorAll('form[action^="/subscription_ajax"]')].map(form => {
@@ -52,20 +63,10 @@
     for (const item of list) {
       item.card.hidden = !included.has(item.id);
       item.card.dataset.followingId = item.id;
-      if (!item.card.querySelector('.pt-creator-groups')) {
-        const button = document.createElement('button'); button.type = 'button'; button.className = 'pt-creator-groups';
-        button.textContent = 'Groups'; button.title = 'Group memberships · G';
-        button.setAttribute('aria-label','Groups for ' + item.name);
-        button.onclick = () => editCreator(item.id,item.name); item.card.append(button);
-      }
+      item.card.querySelectorAll('.pt-creator-groups').forEach(button => button.remove());
     }
-    const bar = document.querySelector('.pt-following-manager');
-    if (bar) {
-      bar.querySelector('strong').textContent = group.name + ' · ' + included.size + (included.size === 1 ? ' creator' : ' creators');
-      bar.querySelector('button').hidden = group.id === M.ALL;
-      bar.querySelector('span').lastChild.textContent = group.id === M.ALL ? ' twice unfollows' : ' twice removes from this group';
-    }
-    window.ptEmptyGuide?.show('following',included.size === 0);
+    document.querySelector('.pt-following-manager')?.remove();
+    window.ptEmptyGuide?.show('following',false);
   }
   function select(id) {
     try {
@@ -101,8 +102,7 @@
     const text = document.createElement('span'); text.textContent = name; row.append(input,text); options.append(row); return input;
   }
   async function editMembers() {
-    let data, group; try { data = scoped(); group = M.active(data); } catch(error) { report(error.message); return; }
-    if (group.id === M.ALL) { report('All Creators includes every creator you follow. Use A over the group name to create a group, or I over the person icon to edit your follows.'); return; }
+    let data, group; try { data = scoped(); group = M.active(data); if (group.id === M.ALL) group = data.lists.find(g => g.id === data.defaultId); } catch(error) { report(error.message); return; }
     const ui = makeDialog('Creators in ' + group.name,'Select creators for this feed. A creator can be in several groups. This changes group membership only.'); if (!ui) return;
     ui.submit.disabled = true; ui.status.textContent = 'Reading who you follow…';
     let inputs = [], original = [];
@@ -141,6 +141,7 @@
   // Installed before page handlers so grouped X removes membership, never a follow.
   document.addEventListener('pointermove',event => { pointer = event.target; if (armed && !armed.contains(pointer)) cancelArm(); },{passive:true});
   addEventListener('blur',() => { pointer = null; cancelArm(); });
+  document.documentElement.addEventListener('pointerleave',() => { pointer = null; cancelArm(); });
   document.addEventListener('keydown',event => {
     if (event.key === 'Escape') { cancelArm(); return; }
     if (event.repeat || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || event.isComposing || event.defaultPrevented || document.querySelector('dialog[open]') || event.target.closest('input,textarea,select,[contenteditable]:not([contenteditable="false"])')) return;
@@ -150,13 +151,25 @@
     const card = target?.closest('.pt-subscription');
     if (!card || card.hidden) return;
     const id = card.dataset.followingId;
+    if (key === 'a' && manager && id) {
+      event.preventDefault(); event.stopImmediatePropagation();
+      try {
+        const data = scoped(), group = M.addToActive(data,id); save(data); cancelArm();
+        announce('Added to ' + group.name + '.');
+        card.classList.remove('pt-creator-added'); void card.offsetWidth; card.classList.add('pt-creator-added');
+        clearTimeout(card.ptAddedTimer); card.ptAddedTimer = setTimeout(() => card.classList.remove('pt-creator-added'),650);
+        // Feedback stays on the avatar; explanatory copy belongs in Menu.
+        card.setAttribute('aria-label',(card.querySelector('.pt-channel-name')?.textContent || id) + ' · in ' + group.name);
+      } catch(error) { report(error.message); }
+      return;
+    }
     if (key === 'g' && id) { event.preventDefault(); event.stopImmediatePropagation(); editCreator(id,card.querySelector('.pt-channel-name')?.textContent || id); return; }
     if (key !== 'x' || !manager) return;
     try {
       const data = scoped(), group = M.active(data); if (group.id === M.ALL) return;
       event.preventDefault(); event.stopImmediatePropagation();
-      if (armed !== card) { cancelArm(); armed = card; card.classList.add('pt-group-remove-armed'); report('Press X again to remove this creator from ' + group.name + ' · Esc cancels. You will still follow them.'); armTimer = setTimeout(cancelArm,4000); return; }
-      M.setMembers(data,group.id,group.channels.filter(c => c !== id)); save(data); cancelArm(); sync(); report('Removed from ' + group.name + '. Still followed in All Creators.');
+      if (armed !== card) { cancelArm(); armed = card; card.classList.add('pt-group-remove-armed'); announce('Press X again to remove this creator from ' + group.name + ' · Esc cancels. You will still follow them.'); armTimer = setTimeout(cancelArm,4000); return; }
+      M.setMembers(data,group.id,group.channels.filter(c => c !== id)); save(data); cancelArm(); sync(); announce('Removed from ' + group.name + '. Still followed in All Creators.');
     } catch(error) { report(error.message); }
   },true);
   window.ptFollowingGroups = {read:scoped,filter:ids => M.filter(scoped(),ids),active:() => M.active(scoped()),editMembers};
@@ -172,18 +185,7 @@
         here:feed,menuClass:'pt-following-picker',noun:'following group',nouns:'following groups',menuLabel:'Choose a following group',
         lockedName:'All Creators', locked:id => id === M.ALL, blank:() => ({channels:[]}),read:() => { try { return scoped(); } catch (_) { return read(); } },save:data => { save(data); return true; },refresh,select
       });
-    try {
-      if (manager) {
-        const bar = document.createElement('div'); bar.className = 'pt-following-manager';
-        const title = document.createElement('strong'), edit = document.createElement('button'); edit.type = 'button'; edit.textContent = 'Edit group creators'; edit.onclick = editMembers;
-        const note = document.createElement('span');
-        for (const [key,text] of [['I',' over group name · '],['G',' over creator · '],['X',' twice removes from a group']]) { const cap = document.createElement('kbd'); cap.textContent = key; note.append(cap,document.createTextNode(text)); }
-        bar.append(title,edit,note);
-        const contents = document.querySelector('#contents');
-        if (contents.contains(header)) header.after(bar); else contents.prepend(bar);
-        sync();
-      }
-    } catch(error) { report(error.message); }
+
   }
   addEventListener('storage',event => { if (event.key === M.KEY || event.key === null) { cancelArm(); if (feed) location.reload(); else { try { sync(); } catch(error) { report(error.message); } } } });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',start,{once:true}); else start();

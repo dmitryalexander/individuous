@@ -178,13 +178,13 @@
     var s = box('pt-guide-following', 50, ICONS.follow, 'Following creators', [
       'Following a creator (YouTube calls it subscribing) puts their videos into your Subscriptions Feed (the play button beside Following at the top right). Who you follow is kept inside this app; you never sign in to YouTube. Follow a handful of creators and the feed becomes your own channel.']);
     s.append(el('h3', '', 'Following groups'),
-      note('The rectangle beside the play button chooses a following group. All Creators always includes every creator you follow, including people in no custom group. It cannot be renamed or deleted. A creator can belong to several groups. Switching the group changes this feed, while the playlist on the left still controls where videos are saved.'));
+      note('The rectangle beside the play button chooses a following group. All Creators always includes every creator you follow, including people in no custom group. It cannot be renamed or deleted. Favorites is the default named creator group. On the creator wall, A adds a creator to the selected named group; from All Creators it adds them to Favorites. A creator can belong to several groups. Switching the group changes this feed, while the playlist on the left still controls where videos are saved.'));
     s.append(row(
       card(['A'], 'New following group', 'Point at the group name or open its list and press A. Type a name; Enter saves and Esc cancels.'),
       card(['R'], 'Rename a group', 'Open the group list, point at or arrow to a custom group and press R. Enter saves; Esc cancels.'),
       card(['X'], 'Delete a group', 'In the group list, press X twice on a custom group. Its creators remain followed. All Creators is always kept.'),
       card(['I'], 'Choose group creators', 'Point at the following-group name and press I. Select the creators for that feed and Save. Space toggles checkboxes; Tab moves; Esc cancels.'),
-      card(['G'], 'A creator’s groups', 'On Manage subscriptions, point at a creator or focus their Groups button and press G. Choose all groups they belong to.')));
+      card(['G'], 'A creator’s groups', 'On Manage subscriptions, point at a creator and press G. Choose all groups they belong to.')));
     s.append(el('h3', '', 'Following and unfollowing'),
       note('Go to a creator’s page. Their picture has a coloured ring: blue means you don’t follow them yet, green means you do. Point at the picture or the banner, or at the creator’s name on a video page, and press a key:'));
     s.append(row(
@@ -216,6 +216,7 @@
     s.append(el('h3', '', 'Manage subscriptions'),
       note('The person button at the top right lists the creators in the selected following group, A to Z. Choose All Creators to see everyone. Point at a creator and press a key:'));
     s.append(row(
+      card(['A'], 'Add to creator group', 'Point at a creator and press A to add them to the active named group. From All Creators, A adds them to Favorites. An amber flash confirms the addition. Pressing A again keeps them in the group. Use G to choose several groups, or I over the group name to edit its creators. From All Creators, I edits Favorites. At least one named creator group is kept; it can be renamed.'),
       card(['X'], 'Remove from this view', 'Press X twice. In All Creators this unfollows the creator. In a named group it removes only their group membership, keeping the follow.'),
       card(['I'], 'Edit the list', 'Opens the same box as pointing at the person button: everyone you follow, one per line, to edit, paste into and Save. (Over the term bar, I edits the search terms instead.)'),
       card(['S'], 'Shuffle', 'Mixes the order of the creators on the page.')));
