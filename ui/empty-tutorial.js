@@ -185,7 +185,8 @@
     }
     const section = node('section', 'pt-empty-tutorial'); section.id = ID;
     section.dataset.kind = kind; section.setAttribute('aria-labelledby', 'pt-welcome-title');
-    const art = node('div', 'pt-welcome-art');
+    const art = node('a', 'pt-welcome-art');
+    art.href = 'https://ynforma.art'; art.target = '_blank'; art.rel = 'noopener noreferrer'; art.title = 'ynforma.art';
     const img = node('img'); img.src = '/tutorial-' + artwork[kind] + '.png';
     img.alt = ''; img.width = 240; img.height = 420; img.decoding = 'async';
     art.append(img);

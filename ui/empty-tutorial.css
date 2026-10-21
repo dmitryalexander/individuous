@@ -1,7 +1,7 @@
 /* The guide stands on the page itself; only the keyboard caps are framed. */
 .pt-welcome-suppressed{display:none!important}
 body.pt-youtube #pt-empty-tutorial{box-sizing:border-box;display:grid;grid-template-columns:240px minmax(0,650px);align-items:center;gap:44px;width:min(1010px,calc(100% - 64px));margin:clamp(42px,7vh,90px) auto 64px;padding:0;color:#ddd;text-align:left}
-#pt-empty-tutorial .pt-welcome-art{align-self:center;pointer-events:none;user-select:none}
+#pt-empty-tutorial .pt-welcome-art{display:block;align-self:center;cursor:pointer;user-select:none}
 #pt-empty-tutorial .pt-welcome-art img{display:block;width:100%;height:auto;max-height:440px;object-fit:contain;background:none;border:0;border-radius:0;box-shadow:none}
 #pt-empty-tutorial[data-kind=discover] .pt-welcome-art img{width:300px;max-width:none;margin-left:-30px}
 #pt-empty-tutorial .pt-welcome-eyebrow{margin:0 0 12px;color:#e6ad45;font:500 11px/1.5 system-ui;letter-spacing:.08em;text-transform:uppercase}
